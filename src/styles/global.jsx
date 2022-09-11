@@ -16,10 +16,16 @@ const style = css`
         text-decoration: none;
     }
 
+    button {
+        background: none;
+        border: none;
+    }
+
     input:focus,
     input:active {
         outline: none;
     }
+
     .visually-hidden {
         position: absolute !important;
         width: 1px !important;
