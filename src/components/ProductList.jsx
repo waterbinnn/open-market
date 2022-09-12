@@ -6,7 +6,7 @@ import ProductItem from './ProductItem';
 function ProductList() {
     return (
         <SectionItem>
-            <H2VisuallyHidden>상품목록</H2VisuallyHidden>
+            <h2 className="visually-hidden">상품목록</h2>
             <Ul>
                 <ProductItem />
                 <ProductItem />

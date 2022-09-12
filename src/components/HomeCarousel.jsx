@@ -2,7 +2,6 @@
 import styled from '@emotion/styled';
 import swiperLeft from '../assets/icons/icon-swiper-1.svg';
 import swiperRight from '../assets/icons/icon-swiper-2.svg';
-import { H2VisuallyHidden } from '../styles/modules/styles';
 
 const Container = styled.section`
     position: relative;
@@ -29,7 +28,7 @@ function HomeCarousel() {
     return (
         <>
             <Container>
-                <H2VisuallyHidden>추천상품</H2VisuallyHidden>
+                <h2 className="visually-hidden">추천상품</h2>
                 <LeftIcon src={swiperLeft} alt="왼쪽버튼" />
                 <RightIcon src={swiperRight} alt="오른쪽버튼" />
             </Container>

@@ -23,8 +23,6 @@ import {
     ButtonImg,
     LinkWrapperBtn,
 } from '../styles/components/Header.style';
-import { Button } from '../styles/modules/Button';
-import { H1VisuallyHidden, H2VisuallyHidden } from '../styles/modules/styles';
 
 //auth 여부에 따라 다르게 보여야 하기 때문에 나중에 auth 넣기
 
@@ -32,7 +30,7 @@ export default function Header() {
     return (
         <HeaderContainer>
             <NavWrapper>
-                <H1VisuallyHidden>호두마켓</H1VisuallyHidden>
+                <h1 className="visually-hidden">호두마켓</h1>
                 <GnbLeft>
                     <Link to="/">
                         <LogoImg src={logo} alt="호두마켓" />
@@ -60,7 +58,7 @@ export default function Header() {
 
                 {/* 셀러 네브  */}
                 <GnbRight>
-                    <H2VisuallyHidden>마이메뉴</H2VisuallyHidden>
+                    <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
                         <ImgIcon src={myPageIcon} alt="마이페이지" />
                         <P>마이페이지</P>
