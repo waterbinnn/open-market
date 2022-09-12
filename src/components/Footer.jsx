@@ -8,7 +8,6 @@ import {
     SideDiv,
     DescriptSpan,
 } from '../styles/components/Footer.style';
-import { H2VisuallyHidden } from '../styles/modules/styles';
 
 function Footer() {
     return (
@@ -16,7 +15,7 @@ function Footer() {
             <FooterContainer>
                 <IntroDiv>
                     <nav>
-                        <H2VisuallyHidden>기타정보</H2VisuallyHidden>
+                        <h2 className="visually-hidden">기타정보</h2>
                         <Ul>
                             <Li>호두샵 소개</Li>
                             <Li>이용약관</Li>
