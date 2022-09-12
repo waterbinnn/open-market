@@ -44,20 +44,20 @@ export default function Header() {
                     </WrapperSearch>
                 </GnbLeft>
                 {/* 게스트 네브 */}
-                {/* <GnbRight>
+                <GnbRight>
                     <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
                         <ImgIcon src={cartIcon} alt="장바구니" />
                         <P>장바구니</P>
                     </WrapperLink>
-                    <WrapperLink to="/">
-                        <ImgIcon src={myPageIcon} alt="마이페이지" />
-                        <P>마이페이지</P>
+                    <WrapperLink href="/login">
+                        <ImgIcon src={myPageIcon} alt="로그인" />
+                        <P>로그인</P>
                     </WrapperLink>
-                </GnbRight> */}
+                </GnbRight>
 
                 {/* 셀러 네브  */}
-                <GnbRight>
+                {/* <GnbRight>
                     <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
                         <ImgIcon src={myPageIcon} alt="마이페이지" />
@@ -73,7 +73,7 @@ export default function Header() {
                         />
                         판매자센터
                     </LinkWrapperBtn>
-                </GnbRight>
+                </GnbRight> */}
             </NavWrapper>
             <Link to="/">
                 <MenuIcon src={menuIcon} alt="메뉴버튼" />
