@@ -107,10 +107,9 @@ export const MenuIcon = styled.img`
     display: none;
     ${theme.mq.tablet} {
         display: block;
-        width: 30px;
         position: absolute;
         right: 5%;
-        top: 25%;
+        top: 30%;
         padding: 5px;
     }
 `;

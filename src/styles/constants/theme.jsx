@@ -2,7 +2,7 @@ import '@emotion/react';
 
 export const size = {
     largest: '75em', //1200px
-    large: '820px',
+    large: '880px',
     small: '550px',
 };
 
