@@ -3,8 +3,34 @@ import styled from '@emotion/styled';
 import { colors } from '../constants/colors';
 import theme from '../constants/theme';
 
+export const SectionItem = styled.section`
+    margin: 80px auto;
+    ${theme.mq.mobile} {
+        margin: 50px auto;
+    }
+`;
+export const Ul = styled.ul`
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(3, 350px);
+    width: 90%;
+    margin: 0 auto;
+    gap: 35px;
+    ${theme.mq.tablet} {
+        gap: 30px;
+        grid-template-columns: repeat(2, 250px);
+    }
+    ${theme.mq.mobile} {
+        grid-template-columns: repeat(1, 250px);
+    }
+`;
+
 export const Li = styled.li`
     cursor: pointer;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    justify-content: center;
 `;
 
 export const Image = styled.img`
@@ -62,25 +88,5 @@ export const PriceSpan = styled.span`
     margin: 2px 0 0 2px;
     ${theme.mq.tablet} {
         font-size: 12px;
-    }
-`;
-
-export const SectionItem = styled.section`
-    width: 90%;
-    height: auto;
-    margin: 80px auto;
-    ${theme.mq.mobile} {
-        margin: 50px auto;
-    }
-`;
-export const Ul = styled.ul`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    gap: 35px;
-    ${theme.mq.tablet} {
-        gap: 25px;
     }
 `;
