@@ -12,7 +12,7 @@ const style = css`
     }
 
     a {
-        color: #767676;
+        color: #000000;
         text-decoration: none;
     }
 
