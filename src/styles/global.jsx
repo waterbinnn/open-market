@@ -19,6 +19,11 @@ const style = css`
     button {
         background: none;
         border: none;
+        cursor: pointer;
+
+        :disabled {
+            cursor: default;
+        }
     }
 
     input:focus,
