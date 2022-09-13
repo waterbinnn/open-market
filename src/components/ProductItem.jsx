@@ -1,5 +1,5 @@
 import {
-    Li,
+    ProductLink,
     Image,
     Span,
     P,
@@ -10,7 +10,7 @@ import {
 function ProductItem() {
     return (
         <>
-            <Li>
+            <ProductLink href="/:productid">
                 <Image
                     src="https://cdn.lecturernews.com/news/photo/202208/103959_333869_3027.jpg"
                     alt=""
@@ -20,7 +20,7 @@ function ProductItem() {
                 <Price>
                     29,000<PriceSpan>원</PriceSpan>
                 </Price>
-            </Li>
+            </ProductLink>
         </>
     );
 }
