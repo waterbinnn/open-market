@@ -39,6 +39,29 @@ const buttonStyles = {
     cursor: 'pointer',
 };
 
+export const SMButton = styled.button(
+    {
+        ...buttonStyles,
+        ...sizeStyles.sm,
+    },
+    (props) => ({
+        width: props.width,
+        margin: props.margin,
+        background: props.background,
+    })
+);
+export const MSButton = styled.button(
+    {
+        ...buttonStyles,
+        ...sizeStyles.ms,
+    },
+    (props) => ({
+        width: props.width,
+        margin: props.margin,
+        background: props.background,
+    })
+);
+
 export const MDButton = styled.button(
     {
         ...buttonStyles,
@@ -52,11 +75,12 @@ export const MDButton = styled.button(
         background: props.background,
     })
 );
-
-export const MSButton = styled.button(
+export const LGButton = styled.button(
     {
         ...buttonStyles,
-        ...sizeStyles.ms,
+        ...sizeStyles.lg,
+        display: 'block',
+        margin: '0 auto',
     },
     (props) => ({
         width: props.width,
