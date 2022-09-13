@@ -4,6 +4,8 @@ import Login from './pages/LoginPage';
 import Signup from './pages/SignupPage';
 import SellerSignup from './pages/SellerSignupPage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import UserCartPage from './pages/UserCartPage';
+import OrderPage from './pages/OrderPage';
 import './App.css';
 
 function App() {
@@ -21,6 +23,14 @@ function App() {
                     <Route
                         path="/:postid"
                         element={<ProductDetailPage />}
+                    ></Route>
+                    <Route
+                        path="/:username/cart"
+                        element={<UserCartPage />}
+                    ></Route>
+                    <Route
+                        path="/:username/order"
+                        element={<OrderPage />}
                     ></Route>
                 </Routes>
             </BrowserRouter>
