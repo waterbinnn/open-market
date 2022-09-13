@@ -69,24 +69,3 @@ export const P = styled.p`
         font-size: 15px;
     }
 `;
-
-export const Price = styled.strong`
-    display: flex;
-    align-items: center;
-    font-weight: 700;
-    font-size: 24px;
-    line-height: 30px;
-    ${theme.mq.tablet} {
-        font-size: 18px;
-    }
-`;
-
-export const PriceSpan = styled.span`
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    margin: 2px 0 0 2px;
-    ${theme.mq.tablet} {
-        font-size: 12px;
-    }
-`;
