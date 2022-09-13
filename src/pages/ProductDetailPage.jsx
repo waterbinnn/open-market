@@ -1,45 +1,110 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import Header from '../components/Header';
 import Amount from '../styles/modules/Amount';
+
+import { colors } from '../styles/constants/colors';
+
+import { L_Price, L_Unit } from '../styles/modules/Price';
+import { MDButton } from '../styles/modules/_Button';
+import {
+    Container,
+    SectionProduct,
+    ImageBox,
+    WrapperInfo,
+    Span,
+    ProductName,
+    DeliveryText,
+    WrapperOrder,
+    WrapperAmount,
+    WrapperTotalCount,
+    Count,
+    Slide,
+    WrapperButton,
+    TotalAcount,
+    TotalCount,
+    WrapperMoney,
+    SectionDetailInfo,
+    TabButton,
+} from '../styles/pages/ProductDetail.style';
 
 function ProductDetail() {
     return (
         <>
-            <article>
-                <h1 className="visually-hidden">상품 구매 정보</h1>
-                <img src="" alt="" />
-                <section>
-                    <h2 className="visually-hidden">제품명</h2>
-                    <span>회사명</span>
-                    <p>딥러닝 개발자 무릎 담요</p>
-                    <strong>
-                        17,500 <span>원</span>
-                    </strong>
-                </section>
-                <section>
-                    <h2>택배배송 / 무료배송</h2>
-                    <Amount />
-                </section>
-                <section>
-                    <h2>총 상품 금액</h2>
-                    <span>
-                        총 수량 <strong>1</strong>개
-                    </span>
-                    <span>|</span>
-                    <strong>
-                        17,500 <span>원</span>
-                    </strong>
-                    <button>바로구매</button>
-                    <button>장바구니</button>
-                </section>
-            </article>
+            <Header />
+            <Container>
+                <SectionProduct>
+                    <h1 className="visually-hidden">상품 구매 정보</h1>
+                    <ImageBox></ImageBox>
+                    <WrapperInfo>
+                        <section>
+                            <h2 className="visually-hidden">제품명</h2>
+                            <Span>회사명</Span>
+                            <ProductName>딥러닝 개발자 무릎 담요</ProductName>
+                            <div>
+                                <L_Price>17,500</L_Price>
+                                <L_Unit>원</L_Unit>
+                            </div>
+                        </section>
 
-            <section>
-                <h2 className="visually-hidden">상품 상세 정보</h2>
-                <button type="button">버튼</button>
-                <button type="button">리뷰</button>
-                <button type="button">Q&A</button>
-                <button type="button">반품/교환정보</button>
-            </section>
+                        <WrapperOrder>
+                            <div>
+                                <DeliveryText>택배배송 / 무료배송</DeliveryText>
+                                <WrapperAmount>
+                                    <Amount />
+                                </WrapperAmount>
+                            </div>
+                            <div>
+                                <WrapperTotalCount>
+                                    <TotalAcount>총 상품 금액</TotalAcount>
+                                    <WrapperMoney>
+                                        <TotalCount>
+                                            총 수량 <Count>1 </Count>개
+                                        </TotalCount>
+                                        <Slide>|</Slide>
+                                        <L_Price color={`${colors.green}`}>
+                                            17,500
+                                        </L_Price>
+                                        <L_Unit
+                                            color={`${colors.green}`}
+                                            margin={'6px 0 0 3px'}
+                                        >
+                                            원
+                                        </L_Unit>
+                                    </WrapperMoney>
+                                </WrapperTotalCount>
+                                <WrapperButton>
+                                    <Link to="/:username/order">
+                                        <MDButton
+                                            width={'416px'}
+                                            background={`${colors.green}`}
+                                        >
+                                            바로구매
+                                        </MDButton>
+                                    </Link>
+                                    <Link to="/:username/cart">
+                                        <MDButton
+                                            width={'200px'}
+                                            background={`${colors.dark}`}
+                                        >
+                                            장바구니
+                                        </MDButton>
+                                    </Link>
+                                </WrapperButton>
+                            </div>
+                        </WrapperOrder>
+                    </WrapperInfo>
+                </SectionProduct>
+
+                <SectionDetailInfo>
+                    <h2 className="visually-hidden">상품 상세 정보</h2>
+                    <TabButton type="button">버튼</TabButton>
+                    <TabButton type="button">리뷰</TabButton>
+                    <TabButton type="button">Q&A</TabButton>
+                    <TabButton type="button">반품/교환</TabButton>
+                </SectionDetailInfo>
+            </Container>
         </>
     );
 }
