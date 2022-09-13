@@ -11,7 +11,7 @@ import { MDButton, MSButton } from '../styles/modules/_Button';
 import {
     CustomerLink,
     SellerLink,
-} from '../styles/components/SignupForm.style';
+} from '../styles/pages/SignupForm.style';
 
 import {
     Section,

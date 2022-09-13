@@ -3,12 +3,9 @@ import { Link } from 'react-router-dom';
 //Assets
 import logo from '../assets/images/Logo-hodu.png';
 //Styles
-import { Input, Nav, ErrorMsg } from '../styles/components/LoginForm.style';
+import { Input, Nav, ErrorMsg } from '../styles/pages/LoginForm.style';
 import { MDButton } from '../styles/modules/_Button';
-import {
-    CustomerLink,
-    SellerLink,
-} from '../styles/components/SignupForm.style';
+import { CustomerLink, SellerLink } from '../styles/pages/SignupForm.style';
 import {
     Section,
     ImgLogo,
