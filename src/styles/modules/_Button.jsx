@@ -2,7 +2,7 @@
 import { colors } from '../constants/colors';
 import styled from '@emotion/styled';
 
-export const sizeStyles = {
+const sizeStyles = {
     sm: {
         fontSize: '16px',
         fontWeight: '500',
@@ -30,17 +30,21 @@ export const sizeStyles = {
     },
 };
 
+const buttonStyles = {
+    border: 'none',
+    borderRadius: '5px',
+    background: colors.disabled,
+    color: colors.white,
+    textAlign: 'center',
+    cursor: 'pointer',
+};
+
 export const MDButton = styled.button(
     {
+        ...buttonStyles,
+        ...sizeStyles.md,
         display: 'block',
         margin: '0 auto',
-        border: 'none',
-        borderRadius: '5px',
-        background: colors.disabled,
-        color: colors.white,
-        ...sizeStyles.md,
-        textAlign: 'center',
-        cursor: 'pointer',
     },
     (props) => ({
         width: props.width,
@@ -51,13 +55,8 @@ export const MDButton = styled.button(
 
 export const MSButton = styled.button(
     {
-        border: 'none',
-        borderRadius: '5px',
-        background: colors.disabled,
-        color: colors.white,
+        ...buttonStyles,
         ...sizeStyles.ms,
-        textAlign: 'center',
-        cursor: 'pointer',
     },
     (props) => ({
         width: props.width,
