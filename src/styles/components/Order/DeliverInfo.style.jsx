@@ -45,16 +45,24 @@ export const WrapperInput = styled.div`
     }
 
     input {
-        height: 40px;
+        padding: 0 8px;
         border: 1px solid ${colors.border};
+        height: 40px;
     }
 `;
 
 export const WrapperAddress = styled.div`
     display: flex;
 
+    div {
+        &:last-child {
+            display: flex;
+            flex-direction: column;
+            width: max-content;
+        }
+    }
+
     input {
-        margin-left: 63px;
         margin-bottom: 8px;
     }
 
@@ -62,7 +70,7 @@ export const WrapperAddress = styled.div`
         display: inline-block;
         padding: 11px;
         margin-left: 12px;
-        width: 140px;
+        width: 130px;
     }
 `;
 export const WideInput = styled.input`
