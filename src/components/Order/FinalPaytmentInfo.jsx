@@ -14,7 +14,6 @@ import {
     WrapperInfo,
     WrapperButton,
 } from '../../styles/components/Order/FinalPaymentInfo.style';
-import { colors } from '../../styles/constants/colors';
 
 function FinalPaytmentInfo() {
     const [check, SetCheck] = useState(checkbox);
