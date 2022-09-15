@@ -1,9 +1,10 @@
 import React from 'react';
+import { Section, H2 } from '../../styles/components/Order/PaymentCheck.style';
 
 function PaymentCheck() {
     return (
-        <section>
-            <h2>결제수단</h2>
+        <Section>
+            <H2>결제수단</H2>
             <div>
                 <input type="radio" name="payment" id="card" value="card" />
                 <label htmlFor="card">신용 /체크카드</label>
@@ -20,7 +21,7 @@ function PaymentCheck() {
                 <input type="radio" name="payment" id="kakao" value="kakao" />
                 <label htmlFor="kakao">카카오페이</label>
             </div>
-        </section>
+        </Section>
     );
 }
 

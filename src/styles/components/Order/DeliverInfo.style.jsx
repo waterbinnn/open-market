@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { colors } from '../../constants/colors';
 
 export const DeliverInfoSection = styled.section`
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 `;
 export const H2 = styled.h2`
@@ -42,6 +42,7 @@ export const WrapperInput = styled.div`
         font-size: 16px;
         line-height: 20px;
         width: 170px;
+        margin: 17px 0;
     }
 
     input {

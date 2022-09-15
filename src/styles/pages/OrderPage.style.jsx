@@ -13,3 +13,10 @@ export const H1 = styled.h1`
     width: 400px;
     margin: 0 auto 54px;
 `;
+
+export const WrapperPayment = styled.div`
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+`;
