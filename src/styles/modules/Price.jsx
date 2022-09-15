@@ -38,20 +38,45 @@ const unitSize = {
 };
 
 //s 사이즈
-export const S_Price = styled.strong({
-    ...priceSize.s,
-});
-export const S_Unit = styled.span({
-    ...unitSize.s,
-});
+export const S_Price = styled.strong(
+    {
+        ...priceSize.s,
+    },
+    (props) => ({
+        color: props.color,
+        margin: props.margin,
+    })
+);
+export const S_Unit = styled.span(
+    {
+        ...unitSize.s,
+    },
+    (props) => ({
+        color: props.color,
+        margin: props.margin,
+    })
+);
 
 //m 사이즈
-export const M_Price = styled.strong({
-    ...priceSize.m,
-});
-export const M_Unit = styled.span({
-    ...unitSize.m,
-});
+export const M_Price = styled.strong(
+    {
+        ...priceSize.m,
+    },
+    (props) => ({
+        color: props.color,
+        margin: props.margin,
+    })
+);
+
+export const M_Unit = styled.span(
+    {
+        ...unitSize.m,
+    },
+    (props) => ({
+        color: props.color,
+        margin: props.margin,
+    })
+);
 
 // L 사이즈
 export const L_Price = styled.strong(
