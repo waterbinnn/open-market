@@ -6,7 +6,7 @@ import {
     CartTable,
     Thead,
     Tbody,
-} from '../../styles/components/CartProductTable.style';
+} from '../../styles/components/Cart/CartProductTable.style';
 
 function CartProductTable() {
     return (

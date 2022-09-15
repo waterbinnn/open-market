@@ -14,7 +14,7 @@ import {
     WrapperTotal,
     WrapperDeliver,
     Discount,
-} from '../../styles/components/OrderProduct.style';
+} from '../../styles/components/Order/OrderProduct.style';
 
 function OrderProduct() {
     return (

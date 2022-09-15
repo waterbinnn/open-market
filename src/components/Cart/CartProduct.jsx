@@ -18,7 +18,7 @@ import {
     WrapperInfo,
     ProductName,
     WrapperPrice,
-} from '../../styles/components/CartProduct.style';
+} from '../../styles/components/Cart/CartProduct.style';
 
 function CartProduct() {
     return (

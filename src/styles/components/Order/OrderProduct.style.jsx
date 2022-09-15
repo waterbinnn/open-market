@@ -1,15 +1,15 @@
 import styled from '@emotion/styled';
-import { colors } from '../constants/colors';
+import { colors } from '../../constants/colors';
+import { WrapperPrice } from '../Cart/CartProduct.style';
 
 export const Tr = styled.tr`
     display: block;
-    margin-bottom: 20px;
     width: 90%;
-    margin: 0 auto;
-    border: 1px solid ${colors.border};
-    border-radius: 10px;
+    margin: 0 auto 17px;
+    border-bottom: 1px solid ${colors.border};
     td {
         width: 100%;
+        height: 130px;
         position: relative;
         display: flex;
         align-items: center;
@@ -19,18 +19,12 @@ export const Tr = styled.tr`
     }
 `;
 
-export const ImgDelete = styled.img`
-    position: absolute;
-    top: 10px;
-    right: 10px;
-`;
-
 export const ProductImg = styled.img`
     display: block;
-    width: 180px;
-    height: 180px;
+    width: 104px;
+    height: 104px;
     border-radius: 10px;
-    margin: 0 20px 0 40px;
+    margin: 10px 36px 0 0;
     object-fit: cover;
 `;
 
@@ -38,7 +32,7 @@ export const WrapperInfoLink = styled.a`
     display: flex;
     flex-direction: column;
     text-align: left;
-    width: 386px;
+    width: 402px;
     padding: 20px;
 
     span {
@@ -66,13 +60,21 @@ export const WrapperInfo = styled.div`
     display: flex;
 `;
 
-export const WrapperPrice = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    margin: 0 60px;
+export const Discount = styled.strong`
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 23px;
+    color: ${colors.dark};
+`;
 
-    button {
-        margin-top: 26px;
-    }
+export const WrapperDiscount = styled.div`
+    width: 150px;
+    margin-right: 35px;
+`;
+export const WrapperDeliver = styled.div`
+    width: 150px;
+    margin-right: 48px;
+`;
+export const WrapperTotal = styled.div`
+    width: 114px;
 `;

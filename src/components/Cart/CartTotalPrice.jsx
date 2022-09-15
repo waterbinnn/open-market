@@ -8,7 +8,7 @@ import {
     Tr,
     Title,
     Icon,
-} from '../../styles/components/CartTotalPrice.style';
+} from '../../styles/components/Cart/CartTotalPrice.style';
 import { MdPrice, MdUnit, LgPrice, LgUnit } from '../../styles/modules/Price';
 
 function CartTotalPrice() {

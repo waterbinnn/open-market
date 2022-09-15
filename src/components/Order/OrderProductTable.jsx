@@ -6,7 +6,7 @@ import {
     Tbody,
     Tfoot,
     TotalPrice,
-} from '../../styles/components/OrderProductTable.style';
+} from '../../styles/components/Order/OrderProductTable.style';
 import { MdPrice } from '../../styles/modules/Price';
 import { colors } from '../../styles/constants/colors';
 
