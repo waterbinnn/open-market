@@ -8,10 +8,7 @@ import { colors } from '../styles/constants/colors';
 
 //Styles
 import { MDButton, MSButton } from '../styles/modules/_Button';
-import {
-    CustomerLink,
-    SellerLink,
-} from '../styles/pages/SignupForm.style';
+import { CustomerLink, SellerLink } from '../styles/pages/SignupForm.style';
 
 import {
     Section,
