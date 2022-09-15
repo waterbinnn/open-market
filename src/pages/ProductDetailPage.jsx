@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../components/Header';
-import Amount from '../styles/modules/Amount';
+import Footer from '../components/Footer';
+import Amount from '../components/Amount';
 
 import { colors } from '../styles/constants/colors';
+import emptyImage from '../assets/images/empty_image.png';
 
 import { L_Price, L_Unit } from '../styles/modules/Price';
 import { MDButton } from '../styles/modules/_Button';
@@ -36,7 +38,9 @@ function ProductDetail() {
             <Container>
                 <SectionProduct>
                     <h1 className="visually-hidden">상품 구매 정보</h1>
-                    <ImageBox></ImageBox>
+                    <ImageBox>
+                        <img src={emptyImage} alt="상품이미지" />
+                    </ImageBox>
                     <WrapperInfo>
                         <section>
                             <h2 className="visually-hidden">제품명</h2>
@@ -105,6 +109,8 @@ function ProductDetail() {
                     <TabButton type="button">반품/교환</TabButton>
                 </SectionDetailInfo>
             </Container>
+
+            <Footer />
         </>
     );
 }
