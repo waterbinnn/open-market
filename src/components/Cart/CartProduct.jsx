@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Amount from '../Amount';
 import { SmPrice, MdPrice } from '../../styles/modules/Price';
-import { MSButton } from '../../styles/modules/_Button';
+import { MsButton } from '../../styles/modules/_Button';
 
 import checkIcon from '../../assets/icons/check-elip.svg';
 import DeleteIcon from '../../assets/icons/icon-delete.svg';
@@ -58,14 +58,14 @@ function CartProduct() {
                         <MdPrice color={`${colors.red}`} margin={'0 auto'}>
                             17,500원
                         </MdPrice>
-                        <MSButton
+                        <MsButton
                             type="button"
                             href="/:productid/order"
                             background={`${colors.green}`}
                             width="130px"
                         >
                             주문하기
-                        </MSButton>
+                        </MsButton>
                     </WrapperPrice>
                     <button type="button">
                         <ImgDelete src={DeleteIcon} alt="삭제" />

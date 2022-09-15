@@ -1,7 +1,7 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CartProductTable from '../components/Cart/CartProductTable';
-import { LGButton } from '../styles/modules/_Button';
+import { LgButton } from '../styles/modules/_Button';
 import { colors } from '../styles/constants/colors';
 import { CartSection, H1, OrderLink } from '../styles/pages/UserCartPage.style';
 
@@ -18,13 +18,13 @@ function UserCartPage() {
                 </article>{' '} */}
                 <CartProductTable />
                 <OrderLink href="/:username/order">
-                    <LGButton
+                    <LgButton
                         background={`${colors.green}`}
                         width={'220px'}
                         margin="40px auto"
                     >
                         주문하기
-                    </LGButton>
+                    </LgButton>
                 </OrderLink>
             </CartSection>
             <Footer />

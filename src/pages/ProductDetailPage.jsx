@@ -9,7 +9,7 @@ import { colors } from '../styles/constants/colors';
 import emptyImage from '../assets/images/empty_image.png';
 
 import { LgPrice, LgUnit } from '../styles/modules/Price';
-import { MDButton } from '../styles/modules/_Button';
+import { MdButton } from '../styles/modules/_Button';
 import {
     Container,
     SectionProduct,
@@ -80,20 +80,20 @@ function ProductDetail() {
                                 </WrapperTotalCount>
                                 <WrapperButton>
                                     <Link to="/:username/order">
-                                        <MDButton
+                                        <MdButton
                                             width={'416px'}
                                             background={`${colors.green}`}
                                         >
                                             바로구매
-                                        </MDButton>
+                                        </MdButton>
                                     </Link>
                                     <Link to="/:username/cart">
-                                        <MDButton
+                                        <MdButton
                                             width={'200px'}
                                             background={`${colors.dark}`}
                                         >
                                             장바구니
-                                        </MDButton>
+                                        </MdButton>
                                     </Link>
                                 </WrapperButton>
                             </div>

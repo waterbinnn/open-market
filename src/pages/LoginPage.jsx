@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/images/Logo-hodu.png';
 //Styles
 import { Input, Nav, ErrorMsg } from '../styles/pages/LoginForm.style';
-import { MDButton } from '../styles/modules/_Button';
+import { MdButton } from '../styles/modules/_Button';
 import { CustomerLink, SellerLink } from '../styles/pages/SignupForm.style';
 import {
     Section,
@@ -40,14 +40,14 @@ function Login() {
                             아이디 또는 비밀번호가 일치하지 않습니다.
                         </ErrorMsg>
                     </Fieldset>
-                    <MDButton
+                    <MdButton
                         padding={'19px 0'}
                         width={'100%'}
                         type="submit"
                         margin={'26px 0 0'}
                     >
                         로그인
-                    </MDButton>
+                    </MdButton>
                 </FormStyle>
                 <Nav>
                     <Link to="/signup">회원가입</Link>

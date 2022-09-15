@@ -7,7 +7,7 @@ import checkOnIcon from '../assets/icons/icon-check-on.svg';
 import { colors } from '../styles/constants/colors';
 
 //Styles
-import { MDButton, MSButton } from '../styles/modules/_Button';
+import { MdButton, MsButton } from '../styles/modules/_Button';
 import { CustomerLink, SellerLink } from '../styles/pages/SignupForm.style';
 
 import {
@@ -40,13 +40,13 @@ function Signup() {
                         <Label htmlFor="email">아이디</Label>
                         <InputGroup>
                             <Input type="text" />
-                            <MSButton
+                            <MsButton
                                 type="submit"
                                 width={'122px'}
                                 background={`${colors.green}`}
                             >
                                 중복확인
-                            </MSButton>
+                            </MsButton>
                         </InputGroup>
                         <ErrorMsg>
                             이미 사용 중인 아이디입니다.
@@ -107,9 +107,9 @@ function Signup() {
                         확인하였고 동의합니다.
                     </p>
                 </CheckGroup>
-                <MDButton type="submit" width={'80%'} margin={'34px 0 0'}>
+                <MdButton type="submit" width={'80%'} margin={'34px 0 0'}>
                     가입하기
-                </MDButton>
+                </MdButton>
             </Section>
         </>
     );
