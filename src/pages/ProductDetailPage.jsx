@@ -8,7 +8,7 @@ import Amount from '../components/Amount';
 import { colors } from '../styles/constants/colors';
 import emptyImage from '../assets/images/empty_image.png';
 
-import { L_Price, L_Unit } from '../styles/modules/Price';
+import { LgPrice, LgUnit } from '../styles/modules/Price';
 import { MDButton } from '../styles/modules/_Button';
 import {
     Container,
@@ -47,8 +47,8 @@ function ProductDetail() {
                             <Span>회사명</Span>
                             <ProductName>딥러닝 개발자 무릎 담요</ProductName>
                             <div>
-                                <L_Price>17,500</L_Price>
-                                <L_Unit>원</L_Unit>
+                                <LgPrice>17,500</LgPrice>
+                                <LgUnit>원</LgUnit>
                             </div>
                         </section>
 
@@ -67,15 +67,15 @@ function ProductDetail() {
                                             총 수량 <Count>1 </Count>개
                                         </TotalCount>
                                         <Slide>|</Slide>
-                                        <L_Price color={`${colors.green}`}>
+                                        <LgPrice color={`${colors.green}`}>
                                             17,500
-                                        </L_Price>
-                                        <L_Unit
+                                        </LgPrice>
+                                        <LgUnit
                                             color={`${colors.green}`}
                                             margin={'6px 0 0 3px'}
                                         >
                                             원
-                                        </L_Unit>
+                                        </LgUnit>
                                     </WrapperMoney>
                                 </WrapperTotalCount>
                                 <WrapperButton>

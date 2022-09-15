@@ -6,7 +6,7 @@ import {
     Span,
     P,
 } from '../styles/components/Product.style';
-import { M_Price, M_Unit } from '../styles/modules/Price';
+import { MdPrice, MdUnit } from '../styles/modules/Price';
 
 function ProductItem() {
     return (
@@ -16,8 +16,8 @@ function ProductItem() {
                 <Span>우당탕탕 라이캣의 실험실</Span>
                 <P>Hack Your Life 개발자 노트북 파우치</P>
                 <div>
-                    <M_Price>29,000</M_Price>
-                    <M_Unit>원</M_Unit>
+                    <MdPrice>29,000</MdPrice>
+                    <MdUnit>원</MdUnit>
                 </div>
             </ProductLink>
         </>

@@ -38,16 +38,17 @@ const unitSize = {
 };
 
 //s 사이즈
-export const S_Price = styled.strong(
+export const SmPrice = styled.strong(
     {
         ...priceSize.s,
     },
     (props) => ({
         color: props.color,
         margin: props.margin,
+        fontWeight: props.fontWeight,
     })
 );
-export const S_Unit = styled.span(
+export const SmUnit = styled.span(
     {
         ...unitSize.s,
     },
@@ -58,7 +59,7 @@ export const S_Unit = styled.span(
 );
 
 //m 사이즈
-export const M_Price = styled.strong(
+export const MdPrice = styled.strong(
     {
         ...priceSize.m,
     },
@@ -68,7 +69,7 @@ export const M_Price = styled.strong(
     })
 );
 
-export const M_Unit = styled.span(
+export const MdUnit = styled.span(
     {
         ...unitSize.m,
     },
@@ -79,7 +80,7 @@ export const M_Unit = styled.span(
 );
 
 // L 사이즈
-export const L_Price = styled.strong(
+export const LgPrice = styled.strong(
     {
         ...priceSize.l,
     },
@@ -88,7 +89,7 @@ export const L_Price = styled.strong(
     })
 );
 
-export const L_Unit = styled.span(
+export const LgUnit = styled.span(
     {
         ...unitSize.l,
     },
