@@ -1,7 +1,6 @@
-import React from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import CartProductTable from '../components/CartProductTable';
+import CartProductTable from '../components/Cart/CartProductTable';
 import { LGButton } from '../styles/modules/_Button';
 import { colors } from '../styles/constants/colors';
 import { CartSection, H1, OrderLink } from '../styles/pages/UserCartPage.style';
