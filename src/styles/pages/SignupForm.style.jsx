@@ -16,3 +16,21 @@ export const SellerLink = styled.a({
     right: '28px',
     padding: '14px 0 40px',
 });
+
+export const SelectBtn = styled.button`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 59px;
+    border: 1px solid ${colors.border};
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    strong {
+        font-weight: 400;
+        margin-right: 10px;
+        margin-top: -4px;
+    }
+`;

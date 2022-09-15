@@ -4,11 +4,18 @@ import { Link } from 'react-router-dom';
 import logo from '../assets/images/Logo-hodu.png';
 import checkOffIcon from '../assets/icons/icon-check-off.svg';
 import checkOnIcon from '../assets/icons/icon-check-on.svg';
+import upArrow from '../assets/icons/icon-up-arrow.svg';
+import downArrow from '../assets/icons/icon-down-arrow.svg';
+
 import { colors } from '../styles/constants/colors';
 
 //Styles
 import { MdButton, MsButton } from '../styles/modules/_Button';
-import { CustomerLink, SellerLink } from '../styles/pages/SignupForm.style';
+import {
+    CustomerLink,
+    SellerLink,
+    SelectBtn,
+} from '../styles/pages/SignupForm.style';
 
 import {
     Section,
@@ -16,7 +23,6 @@ import {
     FormStyle,
     Fieldset,
     Input,
-    Nav,
     ErrorMsg,
     InputGroup,
     Label,
@@ -24,6 +30,7 @@ import {
     InputPassword,
     CheckGroup,
 } from '../styles/components/FormStyles.style';
+import { PhoneDropDown } from '../components/DropDown';
 
 function Signup() {
     return (
@@ -79,9 +86,14 @@ function Signup() {
 
                         <Label htmlFor="phone">휴대폰번호</Label>
                         <InputGroup>
-                            <Input type="text" />
-                            <Input type="text" />
-                            <Input type="text" />
+                            <SelectBtn type="button">
+                                <strong>010</strong>
+                                <img src={downArrow} alt="" />
+                            </SelectBtn>
+                            <PhoneDropDown />
+
+                            <Input type="text" maxLength={'4'} />
+                            <Input type="text" maxLength={'4'} />
                         </InputGroup>
                         <Label htmlFor="email">이메일</Label>
                         <InputGroup>

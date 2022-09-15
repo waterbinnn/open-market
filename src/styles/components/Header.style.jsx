@@ -86,7 +86,30 @@ export const WrapperLink = styled.a`
     ${theme.mq.tablet} {
         display: none;
     }
-    ${theme.mq.mobile} {
+`;
+
+export const WrapperMenu = styled.button`
+    position: relative;
+`;
+export const MenuIcon = styled.img`
+    display: none;
+    ${theme.mq.tablet} {
+        display: block;
+        position: absolute;
+        right: -10px;
+        top: 10px;
+        padding: 5px;
+    }
+`;
+
+export const WrapperButton = styled.button`
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    ${theme.mq.tablet} {
         display: none;
     }
 `;
@@ -100,18 +123,6 @@ export const P = styled.p`
     font-size: 12px;
     line-height: 14px;
     color: ${colors.dark};
-`;
-export const SellerButton = styled.a``;
-
-export const MenuIcon = styled.img`
-    display: none;
-    ${theme.mq.tablet} {
-        display: block;
-        position: absolute;
-        right: 5%;
-        top: 30%;
-        padding: 5px;
-    }
 `;
 
 export const ButtonImg = styled.img`

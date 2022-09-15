@@ -22,7 +22,10 @@ import {
     MenuIcon,
     ButtonImg,
     LinkWrapperBtn,
+    WrapperButton,
+    WrapperMenu,
 } from '../styles/components/Header.style';
+import { MobileDropDown, MyPageDropDown } from './DropDown';
 
 //auth 여부에 따라 다르게 보여야 하기 때문에 나중에 auth 넣기
 
@@ -43,8 +46,8 @@ export default function Header() {
                         <ImgSearch src={searchIcon} alt="" />
                     </WrapperSearch>
                 </GnbLeft>
-                {/* 게스트 네브 */}
-                <GnbRight>
+                {/* 로그인하지 않은 사용자 헤더 */}
+                {/* <GnbRight>
                     <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
                         <ImgIcon src={cartIcon} alt="장바구니" />
@@ -54,9 +57,23 @@ export default function Header() {
                         <ImgIcon src={myPageIcon} alt="로그인" />
                         <P>로그인</P>
                     </WrapperLink>
+                </GnbRight> */}
+
+                {/* 로그인 사용자 헤더  */}
+                <GnbRight>
+                    <h2 className="visually-hidden">마이메뉴</h2>
+                    <WrapperLink href="/:username/cart">
+                        <ImgIcon src={cartIcon} alt="장바구니" />
+                        <P>장바구니</P>
+                    </WrapperLink>
+                    <WrapperButton type="button">
+                        <ImgIcon src={myPageIcon} alt="마이페이지" />
+                        <P>마이페이지</P>
+                        <MyPageDropDown />
+                    </WrapperButton>
                 </GnbRight>
 
-                {/* 셀러 네브  */}
+                {/* 로그인 판매자 헤더  */}
                 {/* <GnbRight>
                     <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
@@ -74,10 +91,11 @@ export default function Header() {
                         판매자센터
                     </LinkWrapperBtn>
                 </GnbRight> */}
+                <WrapperMenu type="button">
+                    <MenuIcon src={menuIcon} alt="메뉴버튼" />
+                    <MobileDropDown />
+                </WrapperMenu>
             </NavWrapper>
-            <Link to="/">
-                <MenuIcon src={menuIcon} alt="메뉴버튼" />
-            </Link>
         </HeaderContainer>
     );
 }

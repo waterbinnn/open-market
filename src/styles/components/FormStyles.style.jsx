@@ -63,8 +63,9 @@ export const Input = styled.input`
     width: 100%;
     border: 1px solid ${colors.border};
     border-radius: 5px;
-    padding: 20px 8px;
-    font-size: 15px;
+    padding: 16px 8px;
+    font-size: 16px;
+    line-height: 1.5;
 `;
 
 export const InputPassword = styled.div`
@@ -81,6 +82,7 @@ export const IconCheck = styled.img`
 
 export const InputGroup = styled.div`
     display: flex;
+    position: relative;
     gap: 12px;
     span {
         margin-top: 18px;
