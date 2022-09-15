@@ -59,6 +59,7 @@ export const MsButton = styled.button(
         width: props.width,
         margin: props.margin,
         background: props.background,
+        color: props.color,
     })
 );
 
