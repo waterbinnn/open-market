@@ -31,6 +31,10 @@ const style = css`
         outline: none;
     }
 
+    fieldset {
+        padding: 0;
+    }
+
     .visually-hidden {
         position: absolute !important;
         width: 1px !important;
