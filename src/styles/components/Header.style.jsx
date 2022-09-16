@@ -89,7 +89,11 @@ export const WrapperLink = styled.a`
 `;
 
 export const WrapperMenu = styled.button`
-    position: relative;
+    display: none;
+    ${theme.mq.tablet} {
+        display: block;
+        position: relative;
+    }
 `;
 export const MenuIcon = styled.img`
     display: none;

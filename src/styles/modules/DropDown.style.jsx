@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import styled from '@emotion/styled';
 import { colors } from '../constants/colors';
+import theme from '../constants/theme';
 
 export const DropDownSection = styled.section`
     position: absolute;
@@ -11,32 +12,51 @@ export const DropDownSection = styled.section`
     background: ${colors.white};
     border-radius: 10px;
     filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
+    ${theme.mq.tablet} {
+        display: none;
+    }
 `;
 
-export const MobileDropDown = styled.section`
+export const DropSection = styled.section`
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: -140px;
     width: 140px;
     padding: 10px 0;
     background: ${colors.white};
     border-radius: 10px;
     filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
+    ${theme.mq.tablet} {
+        display: block;
+    }
 `;
 
 export const Ul = styled.ul`
-    margin: 10px;
+    margin: 5px;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 10px;
-`;
-export const Li = styled.li`
     font-weight: 500;
     font-size: 16px;
     line-height: 20px;
     color: ${colors.dark};
+`;
 
+export const MobileLi = styled.li`
+    width: 100%;
+    padding: 10px;
+    &:hover {
+        outline: 1px solid ${colors.green};
+        border-radius: 10px;
+    }
+`;
+
+export const Li = styled.li`
     button {
         width: 100%;
-        padding: 10px 18px;
+        padding: 10px;
     }
     &:hover {
         outline: 1px solid ${colors.green};
@@ -47,7 +67,7 @@ export const Li = styled.li`
         content: '';
         position: absolute;
         top: -30px;
-        left: 35%;
+        left: 37%;
         width: 30px;
         height: 30px;
         transform: rotate(45deg);

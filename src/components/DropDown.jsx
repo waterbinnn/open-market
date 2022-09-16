@@ -1,6 +1,11 @@
-import { Nums } from '../styles/modules/DropDown.style';
-
-import { DropDownSection, Ul, Li } from '../styles/modules/DropDown.style';
+import {
+    DropDownSection,
+    Ul,
+    Li,
+    DropSection,
+    Nums,
+    MobileLi,
+} from '../styles/modules/DropDown.style';
 
 export function MyPageDropDown() {
     return (
@@ -22,42 +27,42 @@ export function MobileDropDown() {
     return (
         <>
             {/* 로그인 여부에 따라 달라 보임  */}
-            <MobileDropDown>
+            <DropSection>
                 <h2>
                     {/* 로그인하지 않은 사용자 드롭박스  */}
-                    <Ul>
-                        <Li>
+                    {/* <Ul>
+                        <MobileLi>
                             <button type="button">장바구니</button>
-                        </Li>
-                        <li>
+                        </MobileLi>
+                        <MobileLi>
                             <button type="button">로그인</button>
-                        </li>
-                    </Ul>
+                        </MobileLi>
+                    </Ul> */}
 
                     {/* 로그인 사용자 드롭박스  */}
-                    {/* <Ul>
-                        <Li>
+                    <Ul>
+                        <MobileLi>
                             <button type="button">장바구니</button>
-                        </Li>
-                        <Li>
+                        </MobileLi>
+                        <MobileLi>
                             <button type="button">마이페이지</button>
-                        </Li>
-                        <Li>
+                        </MobileLi>
+                        <MobileLi>
                             <button type="button">로그아웃</button>
-                        </Li>
-                    </Ul> */}
+                        </MobileLi>
+                    </Ul>
 
                     {/* 로그인 판매자 드롭박스  */}
                     {/* <ul>
-                        <Li>
+                        <MobileLi>
                             <button type="button">마이페이지</button>
-                        </Li>
-                        <Li>
+                        </MobileLi>
+                        <MobileLi>
                             <button type="button">판매자센터</button>
-                        </Li>
+                        </MobileLi>
                     </ul> */}
                 </h2>
-            </MobileDropDown>
+            </DropSection>
         </>
     );
 }

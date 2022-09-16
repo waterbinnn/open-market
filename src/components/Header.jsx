@@ -31,23 +31,24 @@ import { MobileDropDown, MyPageDropDown } from './DropDown';
 
 export default function Header() {
     return (
-        <HeaderContainer>
-            <NavWrapper>
-                <h1 className="visually-hidden">호두마켓</h1>
-                <GnbLeft>
-                    <Link to="/">
-                        <LogoImg src={logo} alt="호두마켓" />
-                    </Link>
-                    <WrapperSearch>
-                        <InputSearch
-                            type="text"
-                            placeholder="상품을 검색해보세요!"
-                        />
-                        <ImgSearch src={searchIcon} alt="" />
-                    </WrapperSearch>
-                </GnbLeft>
-                {/* 로그인하지 않은 사용자 헤더 */}
-                {/* <GnbRight>
+        <>
+            <HeaderContainer>
+                <NavWrapper>
+                    <h1 className="visually-hidden">호두마켓</h1>
+                    <GnbLeft>
+                        <Link to="/">
+                            <LogoImg src={logo} alt="호두마켓" />
+                        </Link>
+                        <WrapperSearch>
+                            <InputSearch
+                                type="text"
+                                placeholder="상품을 검색해보세요!"
+                            />
+                            <ImgSearch src={searchIcon} alt="" />
+                        </WrapperSearch>
+                    </GnbLeft>
+                    {/* 로그인하지 않은 사용자 헤더 */}
+                    {/* <GnbRight>
                     <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
                         <ImgIcon src={cartIcon} alt="장바구니" />
@@ -59,22 +60,22 @@ export default function Header() {
                     </WrapperLink>
                 </GnbRight> */}
 
-                {/* 로그인 사용자 헤더  */}
-                <GnbRight>
-                    <h2 className="visually-hidden">마이메뉴</h2>
-                    <WrapperLink href="/:username/cart">
-                        <ImgIcon src={cartIcon} alt="장바구니" />
-                        <P>장바구니</P>
-                    </WrapperLink>
-                    <WrapperButton type="button">
-                        <ImgIcon src={myPageIcon} alt="마이페이지" />
-                        <P>마이페이지</P>
-                        <MyPageDropDown />
-                    </WrapperButton>
-                </GnbRight>
+                    {/* 로그인 사용자 헤더  */}
+                    <GnbRight>
+                        <h2 className="visually-hidden">마이메뉴</h2>
+                        <WrapperLink href="/:username/cart">
+                            <ImgIcon src={cartIcon} alt="장바구니" />
+                            <P>장바구니</P>
+                        </WrapperLink>
+                        <WrapperButton type="button">
+                            <ImgIcon src={myPageIcon} alt="마이페이지" />
+                            <P>마이페이지</P>
+                            <MyPageDropDown />
+                        </WrapperButton>
+                    </GnbRight>
 
-                {/* 로그인 판매자 헤더  */}
-                {/* <GnbRight>
+                    {/* 로그인 판매자 헤더  */}
+                    {/* <GnbRight>
                     <h2 className="visually-hidden">마이메뉴</h2>
                     <WrapperLink to="/">
                         <ImgIcon src={myPageIcon} alt="마이페이지" />
@@ -91,11 +92,12 @@ export default function Header() {
                         판매자센터
                     </LinkWrapperBtn>
                 </GnbRight> */}
-                <WrapperMenu type="button">
-                    <MenuIcon src={menuIcon} alt="메뉴버튼" />
-                    <MobileDropDown />
-                </WrapperMenu>
-            </NavWrapper>
-        </HeaderContainer>
+                    <WrapperMenu type="button">
+                        <MenuIcon src={menuIcon} alt="메뉴버튼" />
+                        <MobileDropDown />
+                    </WrapperMenu>
+                </NavWrapper>
+            </HeaderContainer>
+        </>
     );
 }
