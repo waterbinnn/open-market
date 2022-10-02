@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import { colors } from '../constants/colors';
 
 export const ErrorMsg = styled.strong`
+    display: ${(props) => props.display};
     margin-top: 10px;
     color: red;
     font-size: 13px;
