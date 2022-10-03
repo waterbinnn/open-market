@@ -5,14 +5,14 @@ import HomeCarousel from '../components/HomeCarousel';
 import ProductList from '../components/ProductList';
 
 function HomePage() {
-    return (
-        <>
-            <Header />
-            <HomeCarousel />
-            <ProductList />
-            <Footer />
-        </>
-    );
+  return (
+    <>
+      <Header />
+      <HomeCarousel />
+      <ProductList />
+      <Footer />
+    </>
+  );
 }
 
 export default HomePage;
