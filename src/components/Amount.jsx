@@ -47,6 +47,7 @@ function Amount(props) {
     } else {
       if (counter === stock) {
         setDisabledBtn(true);
+        window.alert('상품을 더이상 담을 수 없습니다!');
       } else {
         setCounter(counter + 1);
       }
