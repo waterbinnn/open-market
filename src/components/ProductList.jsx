@@ -6,13 +6,12 @@ import ProductItem from './ProductItem';
 
 function ProductList() {
     const baseUrl = 'https://openmarket.weniv.co.kr';
-    const [productList, setProductList] = useState();
+    const [productList, setProductList] = useState([]);
 
     useEffect(() => {
         async function getProduct() {
             try {
                 const res = await axios.get(baseUrl + '/products/');
-                console.log(res.data);
                 setProductList(res.data.results);
             } catch (err) {
                 console.error(err);
