@@ -1,5 +1,5 @@
 import emptyImage from '../assets/images/empty_image.png';
-
+import { useState } from 'react';
 import {
     ProductLink,
     Image,
@@ -8,18 +8,30 @@ import {
 } from '../styles/components/Product.style';
 import { MdPrice, MdUnit } from '../styles/modules/Price';
 
-function ProductItem() {
+function ProductItem(productList) {
+    console.log(productList);
     return (
         <>
-            <ProductLink href="/:productid">
-                <Image src={emptyImage} alt="" />
-                <Span>우당탕탕 라이캣의 실험실</Span>
-                <P>Hack Your Life 개발자 노트북 파우치</P>
-                <div>
-                    <MdPrice>29,000</MdPrice>
-                    <MdUnit>원</MdUnit>
-                </div>
-            </ProductLink>
+            {productList && (
+                <>
+                    {productList.map((product) => {
+                        return (
+                            <Li key={product.product_id}>
+                                <Image
+                                    src={product.Image}
+                                    alt={product.product_name}
+                                />
+                                <Span>{product.store_name}</Span>
+                                <P>{product.product_name}</P>
+                                <div>
+                                    <MdPrice>{product.price}</MdPrice>
+                                    <MdUnit>원</MdUnit>
+                                </div>
+                            </Li>
+                        );
+                    })}
+                </>
+            )}
         </>
     );
 }

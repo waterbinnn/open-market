@@ -25,7 +25,7 @@ export const Ul = styled.ul`
     }
 `;
 
-export const ProductLink = styled.a`
+export const Li = styled.li`
     cursor: pointer;
     display: flex;
     flex-shrink: 0;
