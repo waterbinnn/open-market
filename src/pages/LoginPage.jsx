@@ -48,7 +48,7 @@ function Login() {
       const res = await axios.post(baseUrl + '/accounts/login/', loginData);
       if (res.status === 200) {
         console.log(res.data);
-        window.localStorage.setItem('username', res.data.id);
+        window.localStorage.setItem('userid', res.data.id);
         window.localStorage.setItem('token', res.data.token);
         navigate('/');
       }
@@ -69,7 +69,7 @@ function Login() {
   return (
     <>
       <Section>
-        <ImgLogo src={logo} alt="호두마켓" />
+        <ImgLogo src={logo} alt="호두마켓" onClick={() => navigate('/')} />
         <CustomerLink href="/login">구매회원 로그인</CustomerLink>
         <SellerLink href="#">판매회원 로그인</SellerLink>
         <FormStyle method="POST" onClick={handleSubmitLogin}>
