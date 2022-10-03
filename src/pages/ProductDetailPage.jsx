@@ -1,12 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Amount from '../components/Amount';
 
 import { colors } from '../styles/constants/colors';
-import emptyImage from '../assets/images/empty_image.png';
 
 import { LgPrice, LgUnit } from '../styles/modules/Price';
 import { MdButton } from '../styles/modules/_Button';
@@ -32,6 +32,23 @@ import {
 } from '../styles/pages/ProductDetail.style';
 
 function ProductDetail() {
+    const params = useParams();
+    const postId = params.postid.slice(1, 3);
+    const [detail, setDetail] = useState([]);
+
+    useEffect(() => {
+        async function getProductDetail() {
+            const baseUrl = 'https://openmarket.weniv.co.kr';
+            try {
+                const res = await axios.get(baseUrl + '/products/' + postId);
+                setDetail(res.data);
+            } catch (err) {
+                console.error(err);
+            }
+        }
+        getProductDetail();
+    }, []);
+
     return (
         <>
             <Header />
@@ -39,15 +56,26 @@ function ProductDetail() {
                 <SectionProduct>
                     <h1 className="visually-hidden">상품 구매 정보</h1>
                     <ImageBox>
-                        <img src={emptyImage} alt="상품이미지" />
+                        <img src={detail.image} alt="상품이미지" />
                     </ImageBox>
                     <WrapperInfo>
                         <section>
-                            <h2 className="visually-hidden">제품명</h2>
-                            <Span>회사명</Span>
-                            <ProductName>딥러닝 개발자 무릎 담요</ProductName>
+                            <h2 className="visually-hidden">
+                                {detail.product_name}이미지
+                            </h2>
+                            <Span>{detail.store_name}</Span>
+                            <ProductName>{detail.product_name}</ProductName>
                             <div>
-                                <LgPrice>17,500</LgPrice>
+                                <LgPrice>
+                                    {typeof detail.price === 'number'
+                                        ? `${detail.price
+                                              .toString()
+                                              .replace(
+                                                  /\B(?=(\d{3})+(?!\d))/g,
+                                                  ','
+                                              )}`
+                                        : `-`}
+                                </LgPrice>
                                 <LgUnit>원</LgUnit>
                             </div>
                         </section>
@@ -64,7 +92,7 @@ function ProductDetail() {
                                     <TotalAcount>총 상품 금액</TotalAcount>
                                     <WrapperMoney>
                                         <TotalCount>
-                                            총 수량 <Count>1 </Count>개
+                                            총 수량 <Count>1</Count> 개
                                         </TotalCount>
                                         <Slide>|</Slide>
                                         <LgPrice color={`${colors.green}`}>
