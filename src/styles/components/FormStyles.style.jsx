@@ -49,6 +49,7 @@ export const ImgLogo = styled.img`
   display: block;
   margin: 0 auto;
   width: 238px;
+  cursor: pointer;
 `;
 
 export const Label = styled.label`
