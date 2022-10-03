@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 
 import logo from '../assets/images/Logo-hodu.png';
 import searchIcon from '../assets/icons/icon-search.svg';
@@ -27,9 +29,9 @@ import {
 } from '../styles/components/Header.style';
 import { MobileDropDown, MyPageDropDown } from './DropDown';
 
-//auth 여부에 따라 다르게 보여야 하기 때문에 나중에 auth 넣기
+function Header() {
+  const { token } = useContext(AuthContext);
 
-export default function Header() {
   return (
     <>
       <HeaderContainer>
@@ -44,51 +46,55 @@ export default function Header() {
               <ImgSearch src={searchIcon} alt="" />
             </WrapperSearch>
           </GnbLeft>
-          {/* 로그인하지 않은 사용자 헤더 */}
-          {/* <GnbRight>
-                    <h2 className="visually-hidden">마이메뉴</h2>
-                    <WrapperLink to="/">
-                        <ImgIcon src={cartIcon} alt="장바구니" />
-                        <P>장바구니</P>
-                    </WrapperLink>
-                    <WrapperLink href="/login">
-                        <ImgIcon src={myPageIcon} alt="로그인" />
-                        <P>로그인</P>
-                    </WrapperLink>
-                </GnbRight> */}
 
-          {/* 로그인 사용자 헤더  */}
-          <GnbRight>
-            <h2 className="visually-hidden">마이메뉴</h2>
-            <WrapperLink href="/:username/cart">
-              <ImgIcon src={cartIcon} alt="장바구니" />
-              <P>장바구니</P>
-            </WrapperLink>
-            <WrapperButton type="button">
-              <ImgIcon src={myPageIcon} alt="마이페이지" />
-              <P>마이페이지</P>
-              <MyPageDropDown />
-            </WrapperButton>
-          </GnbRight>
+          {token ? (
+            <>
+              {/* 로그인 사용자 헤더  */}
+              <GnbRight>
+                <h2 className="visually-hidden">마이메뉴</h2>
+                <WrapperLink href="/:username/cart">
+                  <ImgIcon src={cartIcon} alt="장바구니" />
+                  <P>장바구니</P>
+                </WrapperLink>
+                <WrapperButton type="button">
+                  <ImgIcon src={myPageIcon} alt="마이페이지" />
+                  <P>마이페이지</P>
+                  <MyPageDropDown />
+                </WrapperButton>
+              </GnbRight>
+            </>
+          ) : (
+            <>
+              {/* 로그인하지 않은 사용자 헤더 */}
+              <GnbRight>
+                <h2 className="visually-hidden">마이메뉴</h2>
+                <WrapperLink href="/login">
+                  <ImgIcon src={cartIcon} alt="장바구니" />
+                  <P>장바구니</P>
+                </WrapperLink>
+                <WrapperLink href="/login">
+                  <ImgIcon src={myPageIcon} alt="로그인" />
+                  <P>로그인</P>
+                </WrapperLink>
+              </GnbRight>
+            </>
+          )}
 
           {/* 로그인 판매자 헤더  */}
           {/* <GnbRight>
-                    <h2 className="visually-hidden">마이메뉴</h2>
-                    <WrapperLink to="/">
-                        <ImgIcon src={myPageIcon} alt="마이페이지" />
-                        <P>마이페이지</P>
-                    </WrapperLink>
-                    <LinkWrapperBtn to="/">
-                        <ButtonImg
-                            src={
-                                require('../assets/icons/icon-shopping-bag.svg')
-                                    .default
-                            }
-                            alt=""
-                        />
-                        판매자센터
-                    </LinkWrapperBtn>
-                </GnbRight> */}
+            <h2 className="visually-hidden">마이메뉴</h2>
+            <WrapperLink to="/">
+              <ImgIcon src={myPageIcon} alt="마이페이지" />
+              <P>마이페이지</P>
+            </WrapperLink>
+            <LinkWrapperBtn to="/">
+              <ButtonImg
+                src={require('../assets/icons/icon-shopping-bag.svg').default}
+                alt=""
+              />
+              판매자센터
+            </LinkWrapperBtn>
+          </GnbRight> */}
           <WrapperMenu type="button">
             <MenuIcon src={menuIcon} alt="메뉴버튼" />
             <MobileDropDown />
@@ -98,3 +104,5 @@ export default function Header() {
     </>
   );
 }
+
+export default Header;
