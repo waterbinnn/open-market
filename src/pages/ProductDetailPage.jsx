@@ -35,6 +35,8 @@ function ProductDetail() {
     const params = useParams();
     const postId = params.postid.slice(1, 3);
     const [detail, setDetail] = useState([]);
+    const [counter, setCounter] = useState(0);
+    const [itemStock, setItemStock] = useState(0);
 
     useEffect(() => {
         async function getProductDetail() {
@@ -42,6 +44,7 @@ function ProductDetail() {
             try {
                 const res = await axios.get(baseUrl + '/products/' + postId);
                 setDetail(res.data);
+                setItemStock(res.data.stock);
             } catch (err) {
                 console.error(err);
             }
@@ -84,7 +87,11 @@ function ProductDetail() {
                             <div>
                                 <DeliveryText>택배배송 / 무료배송</DeliveryText>
                                 <WrapperAmount>
-                                    <Amount />
+                                    <Amount
+                                        counter={counter}
+                                        setCounter={setCounter}
+                                        stock={itemStock}
+                                    />
                                 </WrapperAmount>
                             </div>
                             <div>
@@ -92,11 +99,16 @@ function ProductDetail() {
                                     <TotalAcount>총 상품 금액</TotalAcount>
                                     <WrapperMoney>
                                         <TotalCount>
-                                            총 수량 <Count>1</Count> 개
+                                            총 수량 <Count>{counter}</Count> 개
                                         </TotalCount>
                                         <Slide>|</Slide>
                                         <LgPrice color={`${colors.green}`}>
-                                            17,500
+                                            {(counter * detail.price)
+                                                .toString()
+                                                .replace(
+                                                    /\B(?=(\d{3})+(?!\d))/g,
+                                                    ','
+                                                )}
                                         </LgPrice>
                                         <LgUnit
                                             color={`${colors.green}`}

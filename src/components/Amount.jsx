@@ -33,27 +33,30 @@ const Wrapper = styled.div`
     }
 `;
 
-function Amount() {
-    const [disabled, SetDisabled] = useState(true);
-    const [counter, SetCounter] = useState(0);
-
+function Amount(props) {
+    const { counter, setCounter, stock } = props;
+    const [disabledBtn, setDisabledBtn] = useState(false);
     const handleCount = (e) => {
         if (e.target.id === 'minus') {
             if (counter <= 0) {
-                SetDisabled(true);
+                setDisabledBtn(true);
             } else {
-                SetCounter(counter - 1);
-                SetDisabled(false);
+                setCounter(counter - 1);
+                setDisabledBtn(false);
             }
         } else {
-            SetCounter(counter + 1);
+            if (counter === stock) {
+                setDisabledBtn(true);
+            } else {
+                setCounter(counter + 1);
+            }
         }
     };
 
     return (
         <Wrapper>
             <button onClick={handleCount}>
-                <img id="minus" src={minus} alt="빼기" disabled={disabled} />
+                <img id="minus" src={minus} alt="빼기" disabled={disabledBtn} />
             </button>
             <strong>{counter}</strong>
             <button onClick={handleCount}>
