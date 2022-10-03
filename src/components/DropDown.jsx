@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   DropDownSection,
   Ul,
@@ -8,14 +9,22 @@ import {
 } from '../styles/modules/DropDown.style';
 
 export function MyPageDropDown() {
+  const navigate = useNavigate();
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    window.localStorage.clear();
+    navigate('/');
+  };
   return (
     <DropDownSection>
       <h2 className="visually-hidden">메뉴</h2>
+      {/* 로그인 사용자  */}
       <Ul>
         <Li>
           <button type="button">마이페이지</button>
         </Li>
-        <Li>
+        <Li onClick={handleLogout}>
           <button type="button">로그아웃</button>
         </Li>
       </Ul>
@@ -30,17 +39,17 @@ export function MobileDropDown() {
       <DropSection>
         <h2>
           {/* 로그인하지 않은 사용자 드롭박스  */}
-          {/* <Ul>
-                        <MobileLi>
-                            <button type="button">장바구니</button>
-                        </MobileLi>
-                        <MobileLi>
-                            <button type="button">로그인</button>
-                        </MobileLi>
-                    </Ul> */}
+          <Ul>
+            <MobileLi>
+              <button type="button">장바구니</button>
+            </MobileLi>
+            <MobileLi>
+              <button type="button">로그인</button>
+            </MobileLi>
+          </Ul>
 
           {/* 로그인 사용자 드롭박스  */}
-          <Ul>
+          {/* <Ul>
             <MobileLi>
               <button type="button">장바구니</button>
             </MobileLi>
@@ -50,17 +59,17 @@ export function MobileDropDown() {
             <MobileLi>
               <button type="button">로그아웃</button>
             </MobileLi>
-          </Ul>
+          </Ul> */}
 
           {/* 로그인 판매자 드롭박스  */}
-          {/* <ul>
+          {/* <Ul>
                         <MobileLi>
                             <button type="button">마이페이지</button>
                         </MobileLi>
                         <MobileLi>
                             <button type="button">판매자센터</button>
                         </MobileLi>
-                    </ul> */}
+                    </Ul> */}
         </h2>
       </DropSection>
     </>
