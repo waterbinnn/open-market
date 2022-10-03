@@ -51,6 +51,7 @@ function Login() {
         window.localStorage.setItem('userid', res.data.id);
         window.localStorage.setItem('token', res.data.token);
         navigate('/');
+        location.reload();
       }
     } catch (err) {
       if (err.request.response.includes('username')) {
