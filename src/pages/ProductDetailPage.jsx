@@ -32,6 +32,7 @@ import {
 } from '../styles/pages/ProductDetail.style';
 
 function ProductDetail() {
+
   const params = useParams();
   const postId = params.postid.slice(1, 3);
   const [detail, setDetail] = useState([]);
@@ -108,12 +109,12 @@ function ProductDetail() {
                   </WrapperMoney>
                 </WrapperTotalCount>
                 <WrapperButton>
-                  <Link to="/:username/order">
+                  <Link to="/:userid/order">
                     <MdButton width={'416px'} background={`${colors.green}`}>
                       바로구매
                     </MdButton>
                   </Link>
-                  <Link to="/:username/cart">
+                  <Link to="/:userid/cart">
                     <MdButton width={'200px'} background={`${colors.dark}`}>
                       장바구니
                     </MdButton>
