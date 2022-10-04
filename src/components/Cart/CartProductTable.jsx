@@ -1,3 +1,8 @@
+import React, { useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { AuthContext } from '../../context/AuthContext';
+
 import CartProduct from './CartProduct';
 import CartTotalPrice from './CartTotalPrice';
 
@@ -8,7 +13,29 @@ import {
   Tbody,
 } from '../../styles/components/Cart/CartProductTable.style';
 
-function CartProductTable() {
+function CartProductTable(props) {
+  const { token } = useContext(AuthContext);
+  const baseUrl = 'https://openmarket.weniv.co.kr';
+  const [cartList, setCartList] = useState([]);
+  const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    async function getCartInfo() {
+      try {
+        const res = await axios.get(baseUrl + '/cart/', {
+          headers: {
+            Authorization: 'JWT ' + token,
+          },
+        });
+        setCartList(res.data.results);
+        console.log(res.data.results);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    getCartInfo();
+  }, []);
+
   return (
     <>
       <CartTable>
@@ -26,8 +53,10 @@ function CartProductTable() {
           </tr>
         </Thead>
         <Tbody>
-          <CartProduct />
-          <CartProduct />
+          {cartList &&
+            cartList.map((item) => {
+              return <CartProduct key={item.cart_item_id} counter={counter} />;
+            })}
         </Tbody>
         <CartTotalPrice />
       </CartTable>

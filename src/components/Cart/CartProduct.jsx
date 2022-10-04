@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import Amount from '../Amount';
@@ -20,7 +20,8 @@ import {
   WrapperPrice,
 } from '../../styles/components/Cart/CartProduct.style';
 
-function CartProduct() {
+function CartProduct(props) {
+  const { counter } = props;
   return (
     <>
       <Tr>
@@ -46,7 +47,7 @@ function CartProduct() {
           </div>
 
           <div>
-            <Amount />
+            <Amount counter={counter} />
           </div>
 
           <WrapperPrice>
