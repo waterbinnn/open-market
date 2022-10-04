@@ -4,6 +4,7 @@ import { colors } from '../constants/colors';
 import theme from '../constants/theme';
 
 export const DropDownSection = styled.section`
+  display: ${(props) => props.display};
   position: absolute;
   top: 76px;
   left: -40px;
@@ -28,7 +29,7 @@ export const DropSection = styled.section`
   border-radius: 10px;
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
   ${theme.mq.tablet} {
-    display: block;
+    display: ${(props) => props.display};
   }
 `;
 
@@ -77,7 +78,7 @@ export const Li = styled.li`
 `;
 
 export const Nums = styled.ol`
-  ${'' /* display: none; */}
+  display: ${(props) => props.display};
   position: absolute;
   top: 56px;
   left: 0;
@@ -88,13 +89,14 @@ export const Nums = styled.ol`
   overflow: scroll;
   z-index: 100;
   width: 144px;
-  height: 150px;
+  height: 200px;
   padding: 5px;
+  overflow: auto;
   button {
-    padding: 18px 52px 8px 14px;
-    width: 134px;
+    padding: 15px 20px;
     font-weight: 500;
     margin: 0 auto;
+    width: 100%;
     &:hover {
       color: ${colors.green};
     }

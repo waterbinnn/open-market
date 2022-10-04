@@ -11,9 +11,10 @@ import {
   MobileLi,
 } from '../styles/modules/DropDown.style';
 
-export function MyPageDropDown() {
+export function MyPageDropDown(props) {
+  const { isDropDown } = props;
+
   const { token } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -22,7 +23,7 @@ export function MyPageDropDown() {
   };
 
   return (
-    <DropDownSection>
+    <DropDownSection display={isDropDown}>
       <h2 className="visually-hidden">메뉴</h2>
       {/* 로그인 사용자  */}
       {token && (
@@ -39,7 +40,9 @@ export function MyPageDropDown() {
   );
 }
 
-export function MobileDropDown() {
+export function MobileDropDown(props) {
+  const { isDropDown } = props;
+
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -52,7 +55,7 @@ export function MobileDropDown() {
   return (
     <>
       {/* 로그인 여부에 따라 달라 보임  */}
-      <DropSection>
+      <DropSection display={isDropDown}>
         {token ? (
           <>
             {/* 로그인 사용자 드롭박스  */}
@@ -96,9 +99,11 @@ export function MobileDropDown() {
   );
 }
 
-export function PhoneDropDown() {
+export function PhoneDropDown(props) {
+  const { isDropDown } = props;
+
   return (
-    <Nums>
+    <Nums display={isDropDown}>
       <li>
         <button type="button">010</button>
       </li>

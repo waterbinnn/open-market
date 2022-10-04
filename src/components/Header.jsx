@@ -28,9 +28,20 @@ import {
   WrapperMenu,
 } from '../styles/components/Header.style';
 import { MobileDropDown, MyPageDropDown } from './DropDown';
+import { useState } from 'react';
 
 function Header() {
   const { token } = useContext(AuthContext);
+  const [isDropDown, setIsDropDown] = useState('none');
+
+  const handleDropDown = (e) => {
+    e.preventDefault();
+    if (isDropDown === 'none') {
+      setIsDropDown('block');
+    } else {
+      setIsDropDown('none');
+    }
+  };
 
   return (
     <>
@@ -56,10 +67,10 @@ function Header() {
                   <ImgIcon src={cartIcon} alt="장바구니" />
                   <P>장바구니</P>
                 </WrapperLink>
-                <WrapperButton type="button">
+                <WrapperButton type="button" onClick={handleDropDown}>
                   <ImgIcon src={myPageIcon} alt="마이페이지" />
                   <P>마이페이지</P>
-                  <MyPageDropDown />
+                  <MyPageDropDown isDropDown={isDropDown} />
                 </WrapperButton>
               </GnbRight>
             </>
@@ -95,9 +106,9 @@ function Header() {
               판매자센터
             </LinkWrapperBtn>
           </GnbRight> */}
-          <WrapperMenu type="button">
+          <WrapperMenu type="button" onClick={handleDropDown}>
             <MenuIcon src={menuIcon} alt="메뉴버튼" />
-            <MobileDropDown />
+            <MobileDropDown isDropDown={isDropDown} />
           </WrapperMenu>
         </NavWrapper>
       </HeaderContainer>

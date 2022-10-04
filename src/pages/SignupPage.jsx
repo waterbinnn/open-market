@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 //Assets
@@ -33,6 +34,17 @@ import {
 import { PhoneDropDown } from '../components/DropDown';
 
 function Signup() {
+  const [isDropDown, setIsDropDown] = useState('none');
+
+  const handleDropDown = (e) => {
+    e.preventDefault();
+    if (isDropDown === 'none') {
+      setIsDropDown('block');
+    } else {
+      setIsDropDown('none');
+    }
+  };
+
   const handleChange = () => {};
 
   return (
@@ -80,11 +92,11 @@ function Signup() {
 
             <Label htmlFor="phone">휴대폰번호</Label>
             <InputGroup>
-              <SelectBtn type="button">
+              <SelectBtn type="button" onClick={handleDropDown}>
                 <strong>010</strong>
                 <img src={downArrow} alt="" />
               </SelectBtn>
-              <PhoneDropDown />
+              <PhoneDropDown isDropDown={isDropDown} />
 
               <Input type="text" maxLength={'4'} />
               <Input type="text" maxLength={'4'} />
