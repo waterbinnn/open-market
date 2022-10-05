@@ -32,12 +32,12 @@ import {
 } from '../styles/pages/ProductDetail.style';
 
 function ProductDetail() {
-
   const params = useParams();
   const postId = params.postid.slice(1, 3);
   const [detail, setDetail] = useState([]);
   const [counter, setCounter] = useState(0);
   const [itemStock, setItemStock] = useState(0);
+  const [shippingFee, setShippingFee] = useState();
 
   useEffect(() => {
     async function getProductDetail() {
@@ -46,6 +46,7 @@ function ProductDetail() {
         const res = await axios.get(baseUrl + '/products/' + postId);
         setDetail(res.data);
         setItemStock(res.data.stock);
+        setShippingFee(res.data.shipping_fee);
       } catch (err) {
         console.error(err);
       }
@@ -81,7 +82,18 @@ function ProductDetail() {
 
             <WrapperOrder>
               <div>
-                <DeliveryText>택배배송 / 무료배송</DeliveryText>
+                {shippingFee === 0 ? (
+                  <DeliveryText>무료배송</DeliveryText>
+                ) : (
+                  <DeliveryText>
+                    택배배송 /{' '}
+                    {typeof detail.price === 'number' &&
+                      `${shippingFee
+                        .toString()
+                        .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원`}
+                  </DeliveryText>
+                )}
+
                 <WrapperAmount>
                   <Amount
                     counter={counter}
