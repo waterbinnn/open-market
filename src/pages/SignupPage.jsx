@@ -35,13 +35,16 @@ import { PhoneDropDown } from '../components/DropDown';
 
 function Signup() {
   const [isDropDown, setIsDropDown] = useState('none');
+  const [phoneArrow, setPhoneArrow] = useState(downArrow);
 
   const handleDropDown = (e) => {
     e.preventDefault();
     if (isDropDown === 'none') {
       setIsDropDown('block');
+      setPhoneArrow(upArrow);
     } else {
       setIsDropDown('none');
+      setPhoneArrow(downArrow);
     }
   };
 
@@ -94,7 +97,7 @@ function Signup() {
             <InputGroup>
               <SelectBtn type="button" onClick={handleDropDown}>
                 <strong>010</strong>
-                <img src={downArrow} alt="" />
+                <img src={phoneArrow} alt="" />
               </SelectBtn>
               <PhoneDropDown isDropDown={isDropDown} />
 
