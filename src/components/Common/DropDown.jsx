@@ -100,10 +100,10 @@ export function MobileDropDown(props) {
 }
 
 export function PhoneDropDown(props) {
-  const { isDropDown } = props;
+  const { isDropDown, handleClick } = props;
 
   return (
-    <Nums display={isDropDown}>
+    <Nums display={isDropDown} onClick={handleClick}>
       <li>
         <button type="button">010</button>
       </li>
