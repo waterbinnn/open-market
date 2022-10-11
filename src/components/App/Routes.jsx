@@ -7,6 +7,7 @@ import SellerSignup from '../User/SellerSignupPage';
 import ProductDetailPage from '../ProductDetail/ProductDetailPage';
 import UserCartPage from '../Cart/UserCartPage';
 import OrderPage from '../Order/OrderPage';
+import NotFound from '../Common/NotFound';
 
 function Routers() {
   return (
@@ -20,6 +21,7 @@ function Routers() {
           <Route path="/:postid" element={<ProductDetailPage />}></Route>
           <Route path="/:userid/cart" element={<UserCartPage />}></Route>
           <Route path="/:userid/order" element={<OrderPage />}></Route>
+          <Route path={'*'} element={<NotFound />}></Route>
         </Routes>
       </BrowserRouter>
     </>
