@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+
+import { baseUrl } from '../../axiosInstance/constants';
 
 import Header from '../Common/Header';
 import Footer from '../Common/Footer';
@@ -33,22 +35,24 @@ import {
 
 function ProductDetail() {
   const params = useParams();
-  const postId = params.postid.slice(1, 3);
+  const postId = params.postid.slice(1, params.postid.length);
   const [detail, setDetail] = useState([]);
   const [counter, setCounter] = useState(0);
   const [itemStock, setItemStock] = useState(0);
   const [shippingFee, setShippingFee] = useState();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     async function getProductDetail() {
-      const baseUrl = 'https://openmarket.weniv.co.kr';
       try {
         const res = await axios.get(baseUrl + '/products/' + postId);
         setDetail(res.data);
         setItemStock(res.data.stock);
         setShippingFee(res.data.shipping_fee);
+        console.log(res);
       } catch (err) {
-        console.error(err);
+        navigate('*');
       }
     }
     getProductDetail();
