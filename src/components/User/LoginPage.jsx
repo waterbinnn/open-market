@@ -1,6 +1,9 @@
 import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
+import { baseUrl } from '../../axiosInstance/constants';
+
 //Assets
 import logo from '../../assets/images/Logo-hodu.png';
 //Styles
@@ -33,17 +36,8 @@ function Login() {
   const passwordRef = useRef();
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    if (e.target.type === 'text') {
-      setUsername(e.target.value);
-    } else {
-      setPassword(e.target.value);
-    }
-  };
-
   async function handleSubmitLogin(e) {
     e.preventDefault();
-    const baseUrl = 'https://openmarket.weniv.co.kr';
 
     const loginData = {
       username: username,
@@ -74,6 +68,7 @@ function Login() {
     }
   }
 
+
   return (
     <>
       <Section>
@@ -91,9 +86,9 @@ function Login() {
               placeholder="아이디"
               minLength="5"
               maxLength="12"
-              onChange={handleChange}
-              ref={usernameRef}
               value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              ref={usernameRef}
             />
             <label className="visually-hidden" htmlFor="password">
               비밀번호
@@ -102,10 +97,10 @@ function Login() {
               type="password"
               placeholder="비밀번호"
               minLength="6"
-              onChange={handleChange}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               maxLength="16"
               ref={passwordRef}
-              value={password}
             />
             <ErrorMsg display={isError}>{errMsg}</ErrorMsg>
           </Fieldset>
