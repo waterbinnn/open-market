@@ -1,42 +1,38 @@
 import { useNavigate } from 'react-router-dom';
-import { Li, Image, Span, P } from '../../../styles/components/Home/Product.style';
+import {
+  Li,
+  Image,
+  Span,
+  P,
+} from '../../../styles/components/Home/Product.style';
 import { MdPrice, MdUnit } from '../../../styles/modules/Price';
 
 function ProductItem(props) {
-  const { productList } = props;
+  const { productData } = props;
   const navigate = useNavigate();
+
   return (
     <>
-      {productList && (
-        <>
-          {productList.map((product) => {
-            {
-              return (
-                <Li
-                  key={product.product_id}
-                  onClick={() => {
-                    navigate(`/:${product.product_id}`);
-                  }}
-                >
-                  <Image src={product.image} alt={product.product_name} />
-                  <Span>{product.store_name}</Span>
-                  <P>{product.product_name}</P>
-                  <div>
-                    <MdPrice>
-                      {typeof product.price === 'number'
-                        ? `${product.price
-                            .toString()
-                            .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
-                        : `-`}
-                    </MdPrice>
-                    <MdUnit>원</MdUnit>
-                  </div>
-                </Li>
-              );
-            }
-          })}
-        </>
-      )}
+      <Li
+        key={productData.product_id}
+        onClick={() => {
+          navigate(`/:${productData.product_id}`);
+        }}
+      >
+        <Image src={productData.image} alt={productData.product_name} />
+        <Span>{productData.store_name}</Span>
+        <P>{productData.product_name}</P>
+        <div>
+          <MdPrice>
+            {typeof productData.price === 'number'
+              ? `${productData.price
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`
+              : `-`}
+          </MdPrice>
+          <MdUnit>원</MdUnit>
+        </div>
+      </Li>
     </>
   );
 }
