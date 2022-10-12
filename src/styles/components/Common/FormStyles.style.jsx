@@ -128,7 +128,7 @@ export const Nav = styled.nav`
 // 기능구현에 따른 수정 필요
 export const ErrorMsg = styled.strong`
   margin-top: 10px;
-  color: red;
+  color: ${(props) => props.color};
   font-size: 13px;
   line-height: 20px;
   font-weight: 400;
