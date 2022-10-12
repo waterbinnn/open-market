@@ -49,16 +49,21 @@ function Signup() {
   const [lastPhoneNum, setLastPhoneNum] = useState('');
   const [emailId, setEmailId] = useState('');
   const [emailAddress, setEmailAddress] = useState('');
+
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [btnColor, setBtnColor] = useState(colors.grey);
+
   const [msg, setMsg] = useState('');
+  const [msgColor, setMsgColor] = useState(colors.green);
+
   const [passwordMsg, setPasswordMsg] = useState('');
   const [checkPasswordMsg, setCheckPasswordMsg] = useState('');
-  const [msgColor, setMsgColor] = useState(colors.red);
-  const [isChecked, setIsChecked] = useState(false);
-  const [checkIcon, setCheckIcon] = useState(checkOffIcon);
   const [checkRePwIcon, setCheckRePwIcon] = useState(checkOffIcon);
   const [checkPasswordMsgColor, setCheckPassworMsgColor] = useState(colors.red);
+
+  const [checkIcon, setCheckIcon] = useState(checkOffIcon);
+
+  const [isChecked, setIsChecked] = useState(false);
 
   //영문 , 패스워드 정규식
   const checkEn = /^[a-zA-Z0-9]*$/;
@@ -93,20 +98,22 @@ function Signup() {
   //아이디 중복확인
   async function checkIdVaildate(e) {
     e.preventDefault();
+
     const data = { username: username };
+
     if (username.length === 0) {
       setMsg('아이디를 입력해 주세요.');
-    }
-    if (username.length > 6 && checkEn.test(username)) {
+    } else if (username.length > 5 && checkEn.test(username)) {
       try {
         const res = await axios.post(
           baseUrl + '/accounts/signup/valid/username/',
           data
         );
         if (res.status === 202) {
+          console.log(res);
           setMsg(res.data.Success);
           setMsgColor(colors.green);
-          setIsChecked(true);
+          setIsChecked(true); //나중에 버튼 활성화에 쓸
         }
       } catch (err) {
         setMsg(err.response.data.FAIL_Message);
@@ -133,8 +140,9 @@ function Signup() {
   const checkPassword = (e) => {
     setRepeatPassword(e.target.value);
     if (passwordRule.test(password) && password === repeatPassword) {
-      setCheckPasswordMsg('');
+      setCheckPasswordMsg('비밀번호가 일치합니다!');
       setCheckRePwIcon(checkOnIcon);
+      setCheckPassworMsgColor(colors.green);
     } else {
       setCheckPasswordMsg('비밀번호가 일치하지 않습니다');
       setCheckRePwIcon(checkOffIcon);
@@ -201,7 +209,7 @@ function Signup() {
               />
               <IconCheck src={checkIcon} alt="" />
             </InputPassword>
-            <ErrorMsg color={msgColor}>{passwordMsg}</ErrorMsg>
+            <ErrorMsg color={colors.red}>{passwordMsg}</ErrorMsg>
 
             <Label htmlFor="password">비밀번호 재확인</Label>
             <InputPassword>
@@ -223,6 +231,8 @@ function Signup() {
             <Input
               type="text"
               value={name}
+              minLength={2}
+              maxLength={10}
               onChange={(e) => setName(e.target.value)}
             />
 
