@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../auth/AuthContext';
 
@@ -28,19 +28,37 @@ import {
   WrapperMenu,
 } from '../../styles/components/Common/Header.style';
 import { MobileDropDown, MyPageDropDown } from './DropDown';
+import { useEffect } from 'react';
 
 function Header() {
   const { token } = useContext(AuthContext);
-  const [isDropDown, setIsDropDown] = useState('none');
+  const [isDropDown, setIsDropDown] = useState(false);
+  const outSection = useRef();
 
-  const handleDropDown = (e) => {
-    e.preventDefault();
-    if (isDropDown === 'none') {
-      setIsDropDown('block');
-    } else {
-      setIsDropDown('none');
-    }
+  function openDropDown() {
+    setIsDropDown(() => !isDropDown);
+  }
+
+  const handleClickOutside = ({ target }) => {
+    // setIsDropDown(false);
+    console.log(outSection.current);
+
+    // if (isDropDown && !outSection.current.contains(target))
+    //   setIsDropDown(false);
+    // console.log(target);
   };
+  // const handleClickOutside = ({ target }) => {
+  //   if (isDropDown && !outSection.current.contains(target))
+  //     setIsDropDown(false);
+  //   console.log(target);
+  // };
+
+  useEffect(() => {
+    window.addEventListener('click', handleClickOutside);
+    return () => {
+      window.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <>
@@ -62,14 +80,14 @@ function Header() {
               {/* 로그인 사용자 헤더  */}
               <GnbRight>
                 <h2 className="visually-hidden">마이메뉴</h2>
-                <WrapperLink href="/:username/cart">
+                <WrapperLink href="/:userid/cart">
                   <ImgIcon src={cartIcon} alt="장바구니" />
                   <P>장바구니</P>
                 </WrapperLink>
-                <WrapperButton type="button" onClick={handleDropDown}>
+                <WrapperButton type="button" onClick={openDropDown}>
                   <ImgIcon src={myPageIcon} alt="마이페이지" />
                   <P>마이페이지</P>
-                  <MyPageDropDown isDropDown={isDropDown} />
+                  {isDropDown && <MyPageDropDown forwardRef={outSection} />}
                 </WrapperButton>
               </GnbRight>
             </>
@@ -105,9 +123,14 @@ function Header() {
               판매자센터
             </LinkWrapperBtn>
           </GnbRight> */}
-          <WrapperMenu type="button" onClick={handleDropDown}>
+          <WrapperMenu type="button" onClick={openDropDown}>
             <MenuIcon src={menuIcon} alt="메뉴버튼" />
-            <MobileDropDown isDropDown={isDropDown} />
+            {isDropDown && (
+              <MobileDropDown
+                isDropDown={isDropDown}
+                setIsDropDown={setIsDropDown}
+              />
+            )}
           </WrapperMenu>
         </NavWrapper>
       </HeaderContainer>

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../auth/AuthContext';
@@ -9,11 +9,12 @@ import {
   DropSection,
   Nums,
   MobileLi,
+  BackContainer,
 } from '../../styles/modules/DropDown.style';
+import useDetectClose from './hooks/useDetectClose';
+import ModalPortal from '../Modal/ModalPortal';
 
 export function MyPageDropDown(props) {
-  const { isDropDown } = props;
-
   const { token } = useContext(AuthContext);
 
   const handleLogout = (e) => {
@@ -23,7 +24,7 @@ export function MyPageDropDown(props) {
   };
 
   return (
-    <DropDownSection display={isDropDown}>
+    <DropDownSection>
       <h2 className="visually-hidden">메뉴</h2>
       {/* 로그인 사용자  */}
       {token && (
@@ -41,12 +42,10 @@ export function MyPageDropDown(props) {
 }
 
 export function MobileDropDown(props) {
-  const { isDropDown } = props;
-
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = (e) => {
+  const Logout = (e) => {
     e.preventDefault();
     window.localStorage.clear();
     location.reload();
@@ -55,7 +54,7 @@ export function MobileDropDown(props) {
   return (
     <>
       {/* 로그인 여부에 따라 달라 보임  */}
-      <DropSection display={isDropDown}>
+      <DropSection>
         {token ? (
           <>
             {/* 로그인 사용자 드롭박스  */}
@@ -66,7 +65,7 @@ export function MobileDropDown(props) {
               <MobileLi>
                 <button type="button">마이페이지</button>
               </MobileLi>
-              <MobileLi onClick={handleLogout}>
+              <MobileLi onClick={Logout}>
                 <button type="button">로그아웃</button>
               </MobileLi>
             </Ul>
@@ -103,7 +102,7 @@ export function PhoneDropDown(props) {
   const { isDropDown, handleClick } = props;
 
   return (
-    <Nums display={isDropDown} onClick={handleClick}>
+    <Nums isDropDown={isDropDown} onClick={handleClick}>
       <li>
         <button type="button">010</button>
       </li>

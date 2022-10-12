@@ -3,15 +3,26 @@ import styled from '@emotion/styled';
 import { colors } from '../constants/colors';
 import theme from '../constants/theme';
 
+export const BackContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10;
+  background: black;
+`;
+
 export const DropDownSection = styled.section`
-  display: ${(props) => props.display};
+  display: block;
   position: absolute;
-  top: 76px;
-  left: -40px;
+  top: 80px;
+  right: -45px;
   width: 140px;
   padding: 10px 0;
   background: ${colors.white};
   border-radius: 10px;
+  z-index: 100;
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
   ${theme.mq.tablet} {
     display: none;
@@ -29,7 +40,7 @@ export const DropSection = styled.section`
   border-radius: 10px;
   filter: drop-shadow(0px 0px 6px rgba(0, 0, 0, 0.25));
   ${theme.mq.tablet} {
-    display: ${(props) => props.display};
+    display: block;
   }
 `;
 
