@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../../auth/AuthContext';
 
 import { baseUrl } from '../../axiosInstance/constants';
 
@@ -35,6 +36,7 @@ function Login() {
   const usernameRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
 
   async function handleSubmitLogin(e) {
     e.preventDefault();
@@ -48,8 +50,6 @@ function Login() {
     try {
       const res = await axios.post(baseUrl + '/accounts/login/', loginData);
       if (res.status === 200) {
-        console.log(res.data);
-        window.localStorage.setItem('userid', res.data.id);
         window.localStorage.setItem('token', res.data.token);
         navigate('/');
         location.reload();
@@ -68,6 +68,14 @@ function Login() {
     }
   }
 
+  if (token) {
+    return (
+      <>
+        <h1>이미 로그인한 회원입니다.</h1>
+        <Link to="/">홈으로 이동</Link>
+      </>
+    );
+  }
 
   return (
     <>
