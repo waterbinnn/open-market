@@ -28,7 +28,6 @@ import {
   WrapperMenu,
 } from '../../styles/components/Common/Header.style';
 import { MobileDropDown, MyPageDropDown } from './DropDown';
-import { useEffect } from 'react';
 
 function Header() {
   const { token } = useContext(AuthContext);
@@ -38,27 +37,6 @@ function Header() {
   function openDropDown() {
     setIsDropDown(() => !isDropDown);
   }
-
-  const handleClickOutside = ({ target }) => {
-    // setIsDropDown(false);
-    console.log(outSection.current);
-
-    // if (isDropDown && !outSection.current.contains(target))
-    //   setIsDropDown(false);
-    // console.log(target);
-  };
-  // const handleClickOutside = ({ target }) => {
-  //   if (isDropDown && !outSection.current.contains(target))
-  //     setIsDropDown(false);
-  //   console.log(target);
-  // };
-
-  useEffect(() => {
-    window.addEventListener('click', handleClickOutside);
-    return () => {
-      window.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
 
   return (
     <>
