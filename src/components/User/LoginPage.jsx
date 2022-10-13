@@ -26,7 +26,11 @@ import {
   Fieldset,
 } from '../../styles/components/Common/FormStyles.style';
 
+import { setStoredUser } from '../../user-storage';
+
 function Login() {
+  const user = { username, password };
+
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isBuyer, setIsBuyer] = useState('BUYER');
@@ -44,13 +48,13 @@ function Login() {
     const loginData = {
       username: username,
       password: password,
-      login_type: isBuyer, // BUYER : 일반 구매자, SELLER : 판매자
+      login_type: isBuyer,
     };
 
     try {
       const res = await axios.post(baseUrl + '/accounts/login/', loginData);
       if (res.status === 200) {
-        window.localStorage.setItem('token', res.data.token);
+        setStoredUser(res.data.token);
         navigate('/');
         location.reload();
       }
@@ -62,7 +66,6 @@ function Login() {
       } else if (err.request.response.includes('로그인 정보가 없습니다.')) {
         setIsError('true');
         setErrMsg('아이디 혹은 비밀번호를 다시 입력해주세요.');
-        passwordRef.current.focus();
         setPassword('');
       }
     }
@@ -83,7 +86,7 @@ function Login() {
         <ImgLogo src={logo} alt="호두마켓" onClick={() => navigate('/')} />
         <CustomerLink href="/login">구매회원 로그인</CustomerLink>
         <SellerLink href="#">판매회원 로그인</SellerLink>
-        <FormStyle method="POST" onClick={handleSubmitLogin}>
+        <FormStyle>
           <Fieldset>
             <legend className="visually-hidden">로그인</legend>
             <label htmlFor="email" className="visually-hidden">
@@ -118,6 +121,7 @@ function Login() {
             type="submit"
             margin={'26px 0 0'}
             background={`${colors.green}`}
+            onClick={handleSubmitLogin}
           >
             로그인
           </MdButton>
