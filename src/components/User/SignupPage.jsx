@@ -1,75 +1,57 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+import { AuthContext } from '../../auth/AuthContext';
 import { baseUrl } from '../../axiosInstance/constants';
+
+import UserAccount from './SignUp/UserAccount';
 
 //Assets
 import logo from '../../assets/images/Logo-hodu.png';
-import checkOffIcon from '../../assets/icons/icon-check-off.svg';
-import checkOnIcon from '../../assets/icons/icon-check-on.svg';
-import upArrow from '../../assets/icons/icon-up-arrow.svg';
-import downArrow from '../../assets/icons/icon-down-arrow.svg';
-
-import { colors } from '../../styles/constants/colors';
+import checkBox from '../../assets/icons/check-box.svg';
+import checkFillBox from '../../assets/icons/check-fill-box.svg';
 
 //Styles
-import { MdButton, MsButton } from '../../styles/modules/_Button';
+import { colors } from '../../styles/constants/colors';
+import { MdButton } from '../../styles/modules/_Button';
 import {
   CustomerLink,
   SellerLink,
-  SelectBtn,
 } from '../../styles/components/User/SignupForm.style';
 
 import {
   Section,
   ImgLogo,
   FormStyle,
-  Fieldset,
-  Input,
-  ErrorMsg,
-  InputGroup,
-  Label,
-  IconCheck,
-  InputPassword,
   CheckGroup,
-  UsernameForm,
 } from '../../styles/components/Common/FormStyles.style';
-import { PhoneDropDown } from '../../components/Common/DropDown';
+
+import { clearStoredUser } from '../../user-storage';
 
 function Signup() {
-  const [isDropDown, setIsDropDown] = useState(false);
-  const [phoneArrow, setPhoneArrow] = useState(downArrow);
+  const [isActive, setIsActive] = useState(true);
+  const [btnColor, setBtnColor] = useState(colors.grey);
+  const [checkedBox, setCheckedBox] = useState(checkBox);
+  const [isName, setIsName] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [isUsernameValid, setIsUsernameValid] = useState(false);
+  const [isPhone, setIsPhone] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const [name, setName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
-  const [name, setName] = useState('');
   const [firstPhoneNum, setFirstPhoneNum] = useState('010');
   const [middlePhoneNum, setMiddlePhoneNum] = useState('');
   const [lastPhoneNum, setLastPhoneNum] = useState('');
-  const [emailId, setEmailId] = useState('');
-  const [emailAddress, setEmailAddress] = useState('');
 
-  const [btnDisabled, setBtnDisabled] = useState(true);
-  const [btnColor, setBtnColor] = useState(colors.grey);
+  const navigate = useNavigate();
+  const { token } = useContext(AuthContext);
 
-  const [msg, setMsg] = useState('');
-  const [msgColor, setMsgColor] = useState(colors.green);
-
-  const [passwordMsg, setPasswordMsg] = useState('');
-  const [checkPasswordMsg, setCheckPasswordMsg] = useState('');
-  const [checkRePwIcon, setCheckRePwIcon] = useState(checkOffIcon);
-  const [checkPasswordMsgColor, setCheckPassworMsgColor] = useState(colors.red);
-
-  const [checkIcon, setCheckIcon] = useState(checkOffIcon);
-
-  const [isChecked, setIsChecked] = useState(false);
-
-  //영문 , 패스워드 정규식
-  const checkEn = /^[a-zA-Z0-9]*$/;
-  // const passwordRule = /^[A-Za-z0-9]{8,18}$/;
-  const passwordRule = /^[a-zA-Z](?=.{0,28}[0-9])[0-9a-zA-Z]{6,29}$/;
-  const telRule = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-[0-9]{3,4}-[0-9]{4}$/;
+  //휴대폰번호
+  let phoneNumber = firstPhoneNum + middlePhoneNum + lastPhoneNum;
 
   //회원가입 함수
   async function submitSignUp(e) {
@@ -78,93 +60,96 @@ function Signup() {
       username: username,
       password: password,
       password2: repeatPassword,
-      phone_number: phoneNumber, // 전화번호는 010으로 시작하는 10~11자리 숫자
-      name: name, // 이름
+      phone_number: phoneNumber,
+      name: name,
     };
 
     try {
       const res = await axios.post(baseUrl + '/accounts/signup/', userData);
-      console.log(res);
-      if (res.status === 200) {
-        console.log(res);
-        setBtnDisabled(false);
-        setBtnColor(green);
+      if (res.status === 201) {
+        setBtnColor(colors.green);
+        navigate('/');
       }
     } catch (err) {
-      console.error(err.response.data);
-    }
-  }
-
-  //아이디 중복확인
-  async function checkIdVaildate(e) {
-    e.preventDefault();
-
-    const data = { username: username };
-
-    if (username.length === 0) {
-      setMsg('아이디를 입력해 주세요.');
-    } else if (username.length > 5 && checkEn.test(username)) {
-      try {
-        const res = await axios.post(
-          baseUrl + '/accounts/signup/valid/username/',
-          data
-        );
-        if (res.status === 202) {
-          console.log(res);
-          setMsg(res.data.Success);
-          setMsgColor(colors.green);
-          setIsChecked(true); //나중에 버튼 활성화에 쓸
-        }
-      } catch (err) {
-        setMsg(err.response.data.FAIL_Message);
-        setMsgColor(colors.red);
+      console.error(err);
+      setBtnColor(colors.grey);
+      if ('password' in err.response.data) {
+        alert(err.response.data.password[0]);
+        setPassword('');
+        setRepeatPassword('');
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+        setBtnColor(colors.green);
       }
-    } else {
-      setMsg('영문 6~16자 이내로 입력해 주세요.');
-      setMsgColor(colors.red);
+
+      if ('phone_number' in err.response.data) {
+        alert(err.response.data.phone_number[0]);
+        setMiddlePhoneNum('');
+        setLastPhoneNum('');
+        setIsActive(true);
+      } else {
+        setIsActive(false);
+        setBtnColor(colors.green);
+      }
     }
   }
 
-  // 비밀번호 검증
-  function handleBlurPassword() {
-    if (password.length > 7 && passwordRule.test(password)) {
-      setPasswordMsg('');
-      setCheckIcon(checkOnIcon);
+  //체크박스
+  const handleCheckBox = (e) => {
+    if (e.target.src.includes('fill')) {
+      setCheckedBox(checkBox);
     } else {
-      setPasswordMsg('8자 이상, 영소문자를 포함해 작성해주세요');
-      setCheckIcon(checkOffIcon);
+      setCheckedBox(checkFillBox);
+      setIsChecked(true);
     }
+  };
+
+  //폰번호 유효성검사
+  useEffect(() => {
+    if (phoneNumber.length > 9) {
+      setIsPhone(true);
+    } else {
+      setIsPhone(false);
+    }
+  }, [phoneNumber]);
+
+  //가입 버튼활성화
+  useEffect(() => {
+    if (
+      isUsernameValid &&
+      isPasswordValid &&
+      isPhone &&
+      isName &&
+      isChecked === true
+    ) {
+      setBtnColor(colors.green);
+      setIsActive(false);
+    } else {
+      setBtnColor(colors.grey);
+      setIsActive(true);
+    }
+  }, [isUsernameValid, isPasswordValid, isPhone, isName, isChecked]);
+
+  const Logout = () => {
+    clearStoredUser();
+    location.reload();
+    navigate('/signUp');
+  };
+
+  if (token) {
+    return (
+      <>
+        <h1>
+          이미 로그인한 회원입니다.
+          <br />
+          로그아웃 후 가입하시겠습니까?
+        </h1>
+        <Link to="/">홈으로 이동</Link>
+        <button onClick={Logout}>로그아웃</button>
+      </>
+    );
   }
-
-  //비밀번호 유효성 검사
-  const checkPassword = (e) => {
-    setRepeatPassword(e.target.value);
-    if (passwordRule.test(password) && password === repeatPassword) {
-      setCheckPasswordMsg('비밀번호가 일치합니다!');
-      setCheckRePwIcon(checkOnIcon);
-      setCheckPassworMsgColor(colors.green);
-    } else {
-      setCheckPasswordMsg('비밀번호가 일치하지 않습니다');
-      setCheckRePwIcon(checkOffIcon);
-      setCheckPassworMsgColor(colors.red);
-    }
-  };
-
-  //휴대폰 드롭다운
-  const handleDropDown = (e) => {
-    e.preventDefault();
-    setIsDropDown(() => !isDropDown);
-    setPhoneArrow(upArrow);
-    if (phoneArrow === upArrow) {
-      setPhoneArrow(downArrow);
-    }
-  };
-
-  const handleFirstPhoneNum = (e) => {
-    setFirstPhoneNum(e.target.innerText);
-    setPhoneArrow(downArrow);
-    setIsDropDown(false);
-  };
 
   return (
     <>
@@ -175,116 +160,35 @@ function Signup() {
         <CustomerLink href="/signup">구매회원가입</CustomerLink>
         <SellerLink href="/seller-signup">판매회원가입</SellerLink>
         <FormStyle>
-          <Fieldset>
-            <legend className="visually-hidden">회원가입</legend>
-            <Label htmlFor="username">아이디</Label>
-            <InputGroup>
-              <Input
-                type="text"
-                value={username}
-                minLength={6}
-                maxLength={16}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <MsButton
-                type="button"
-                width={'122px'}
-                background={`${colors.green}`}
-                onClick={checkIdVaildate}
-              >
-                중복확인
-              </MsButton>
-            </InputGroup>
-            <ErrorMsg color={msgColor}>{msg}</ErrorMsg>
-
-            <Label htmlFor="password">비밀번호</Label>
-            <InputPassword>
-              <Input
-                type="text"
-                minLength="8"
-                maxLength="18"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onBlur={handleBlurPassword}
-              />
-              <IconCheck src={checkIcon} alt="" />
-            </InputPassword>
-            <ErrorMsg color={colors.red}>{passwordMsg}</ErrorMsg>
-
-            <Label htmlFor="password">비밀번호 재확인</Label>
-            <InputPassword>
-              <Input
-                type="text"
-                minLength="8"
-                maxLength="18"
-                value={repeatPassword}
-                onChange={(e) => setRepeatPassword(e.target.value)}
-                onBlur={checkPassword}
-              />
-              <IconCheck src={checkRePwIcon} alt="" />
-            </InputPassword>
-            <ErrorMsg color={checkPasswordMsgColor}>
-              {checkPasswordMsg}
-            </ErrorMsg>
-
-            <Label htmlFor="name">이름</Label>
-            <Input
-              type="text"
-              value={name}
-              minLength={2}
-              maxLength={10}
-              onChange={(e) => setName(e.target.value)}
-            />
-
-            <Label htmlFor="phone">휴대폰번호</Label>
-            <InputGroup>
-              <SelectBtn type="button" onClick={handleDropDown}>
-                <strong>{firstPhoneNum}</strong>
-                <img src={phoneArrow} alt="화살표" />
-              </SelectBtn>
-              {isDropDown && (
-                <PhoneDropDown
-                  isDropDown={isDropDown}
-                  handleClick={handleFirstPhoneNum}
-                />
-              )}
-
-              <Input
-                type="text"
-                maxLength={'4'}
-                value={middlePhoneNum}
-                onChange={(e) => setMiddlePhoneNum(e.target.value)}
-              />
-              <Input
-                type="text"
-                maxLength={'4'}
-                value={lastPhoneNum}
-                onChange={(e) => setLastPhoneNum(e.target.value)}
-              />
-            </InputGroup>
-            <Label htmlFor="email">이메일</Label>
-            <InputGroup>
-              <Input
-                type="text"
-                value={emailId}
-                onChange={(e) => setEmailId(e.target.value)}
-              />
-              <span>@</span>
-              <Input
-                type="text"
-                value={emailAddress}
-                onChange={(e) => setEmailAddress(e.target.value)}
-              />
-            </InputGroup>
-          </Fieldset>
+          <UserAccount
+            username={username}
+            setUsername={setUsername}
+            name={name}
+            setName={setName}
+            password={password}
+            setPassword={setPassword}
+            repeatPassword={repeatPassword}
+            setRepeatPassword={setRepeatPassword}
+            phoneNumber={phoneNumber}
+            firstPhoneNum={firstPhoneNum}
+            setFirstPhoneNum={setFirstPhoneNum}
+            middlePhoneNum={middlePhoneNum}
+            setMiddlePhoneNum={setMiddlePhoneNum}
+            lastPhoneNum={lastPhoneNum}
+            setLastPhoneNum={setLastPhoneNum}
+            isName={isName}
+            setIsName={setIsName}
+            isPasswordValid={setIsPasswordValid}
+            setIsPasswordValid={setIsPasswordValid}
+            isUsernameValid={isUsernameValid}
+            setIsUsernameValid={setIsUsernameValid}
+            isPhone={isPhone}
+            setIsPhone={setIsPhone}
+          />
         </FormStyle>
         <CheckGroup>
-          {/* 클릭 시 체크박스 이미지 바뀌게 이벤트  */}
-          <button>
-            <img
-              src={require('../../assets/icons/check-box.svg').default}
-              alt="동의 체크박스"
-            />
+          <button type="button" onClick={handleCheckBox}>
+            <img src={checkedBox} alt="동의 체크박스" />
           </button>
           <p>
             호두샵의 <strong>이용약관 </strong> 및{' '}
@@ -296,8 +200,9 @@ function Signup() {
           type="button"
           width={'80%'}
           margin={'34px 0 0'}
-          background={setBtnColor}
+          background={btnColor}
           onClick={submitSignUp}
+          disabled={isActive}
         >
           가입하기
         </MdButton>
@@ -305,5 +210,13 @@ function Signup() {
     </>
   );
 }
-
 export default Signup;
+
+/*
+Todo
+1. 파일 분리 
+2. 가입하기 버튼 활성화
+3. 가입하기 클릭했을 때 중복확인 안했으면 하라고 알림창, 오류메세지
+4. 가입 완료되면 홈페이지로 이동, 로그인 이미 된 상태로 만들기 
+5. 유저 정보 쿼리에 저장 (?)
+*/
