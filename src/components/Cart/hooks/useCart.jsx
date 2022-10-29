@@ -1,23 +1,30 @@
-import React, { useState } from 'react';
-import { useContext } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
+
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../auth/AuthContext';
 import axios from 'axios';
+import { queryKeys } from '../../../react-query/constants';
 
-export default async function getCartInfo() {
+const baseUrl = 'https://openmarket.weniv.co.kr';
+
+const test =
+  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJlbWFpbCI6IiIsInVzZXJuYW1lIjoiYnV5ZXIxIiwiZXhwIjoxNjY3NjQ3NTUxfQ.6g4qotNFMlzPRG_ApXyP8DV9Cird28flX-Q0V1BkHAg';
+
+export async function getCart() {
   const { token } = useContext(AuthContext);
-  const baseUrl = 'https://openmarket.weniv.co.kr';
-  const [cartList, setCartList] = useState([]);
-  try {
-    const res = await axios.get(baseUrl + '/cart/', {
-      headers: {
-        Authorization: 'JWT ' + token,
-      },
-    });
-    setCartList(res.data.results);
 
-    console.log(res);
-  } catch (err) {
-    console.error(err);
-  }
-  return { cartList, setCartList, getCartInfo };
+  const { data } = await axios.get(baseUrl + '/cart/', {
+    headers: {
+      Authorization: `JWT ${JSON.parse(token)}`,
+    },
+  });
+  return data;
+}
+
+export function useCart() {
+  const fallback = [];
+  const { data = fallback } = useQuery(queryKeys.cart, getCart);
+
+  console.log('fall', fallback);
+  return data;
 }
