@@ -1,6 +1,6 @@
-import { useState, useContext, useRef } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../auth/AuthContext';
+import { getUser } from '../../user-storage';
 
 import logo from '../../assets/images/Logo-hodu.png';
 import searchIcon from '../../assets/icons/icon-search.svg';
@@ -30,13 +30,14 @@ import {
 import { MobileDropDown, MyPageDropDown } from './DropDown';
 
 function Header() {
-  const { token } = useContext(AuthContext);
   const [isDropDown, setIsDropDown] = useState(false);
   const outSection = useRef();
 
   function openDropDown() {
     setIsDropDown(() => !isDropDown);
   }
+
+  const user = getUser();
 
   return (
     <>
@@ -53,7 +54,7 @@ function Header() {
             </WrapperSearch>
           </GnbLeft>
 
-          {token ? (
+          {user ? (
             <>
               {/* 로그인 사용자 헤더  */}
               <GnbRight>

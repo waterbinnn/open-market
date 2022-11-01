@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../auth/AuthContext';
+
+import { getUser, clearUser } from '../../user-storage';
+
 import {
   DropDownSection,
   Ul,
@@ -11,15 +11,13 @@ import {
   MobileLi,
   BackContainer,
 } from '../../styles/modules/DropDown.style';
-import useDetectClose from './hooks/useDetectClose';
-import ModalPortal from '../Modal/ModalPortal';
 
 export function MyPageDropDown(props) {
-  const { token } = useContext(AuthContext);
+  const user = getUser();
 
   const handleLogout = (e) => {
     e.preventDefault();
-    window.localStorage.clear();
+    clearUser();
     location.reload();
   };
 
@@ -27,7 +25,7 @@ export function MyPageDropDown(props) {
     <DropDownSection>
       <h2 className="visually-hidden">메뉴</h2>
       {/* 로그인 사용자  */}
-      {token && (
+      {user && (
         <Ul>
           <Li>
             <button type="button">마이페이지</button>
@@ -42,8 +40,8 @@ export function MyPageDropDown(props) {
 }
 
 export function MobileDropDown(props) {
-  const { token } = useContext(AuthContext);
   const navigate = useNavigate();
+  const user = getUser();
 
   const Logout = (e) => {
     e.preventDefault();
@@ -53,9 +51,8 @@ export function MobileDropDown(props) {
 
   return (
     <>
-      {/* 로그인 여부에 따라 달라 보임  */}
       <DropSection>
-        {token ? (
+        {user ? (
           <>
             {/* 로그인 사용자 드롭박스  */}
             <Ul>
