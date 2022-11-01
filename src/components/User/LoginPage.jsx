@@ -1,9 +1,9 @@
-import { useState, useRef, useContext } from 'react';
+import { React, useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { AuthContext } from '../../auth/AuthContext';
+import { useForm } from 'react-hook-form';
 
-import { baseUrl } from '../../axiosInstance/constants';
+import { useAuth } from '../../auth/useAuth';
+import { getUser } from '../../user-storage';
 
 //Assets
 import logo from '../../assets/images/Logo-hodu.png';
@@ -26,52 +26,33 @@ import {
   Fieldset,
 } from '../../styles/components/Common/FormStyles.style';
 
-import { setStoredUser } from '../../user-storage';
-
 function Login() {
-  const user = { username, password };
+  const { login } = useAuth();
+  const {
+    register,
+    formState: { errors },
+    setError,
+    handleSubmit,
+    resetField,
+    setFocus,
+  } = useForm({ mode: 'onBlur' });
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isBuyer, setIsBuyer] = useState('BUYER');
-  const [isError, setIsError] = useState('none');
-  const [errMsg, setErrMsg] = useState('');
-
-  const usernameRef = useRef();
-  const passwordRef = useRef();
   const navigate = useNavigate();
-  const { token } = useContext(AuthContext);
 
-  async function handleSubmitLogin(e) {
-    e.preventDefault();
+  const [login_type, setLoginType] = useState('BUYER');
 
-    const loginData = {
-      username: username,
-      password: password,
-      login_type: isBuyer,
-    };
+  useEffect(() => {
+    setFocus('id');
+  }, [setFocus]);
 
-    try {
-      const res = await axios.post(baseUrl + '/accounts/login/', loginData);
-      if (res.status === 200) {
-        setStoredUser(res.data.token);
-        navigate('/');
-        location.reload();
-      }
-    } catch (err) {
-      if (err.request.response.includes('username')) {
-        usernameRef.current.focus();
-      } else if (err.request.response.includes('password')) {
-        passwordRef.current.focus();
-      } else if (err.request.response.includes('로그인 정보가 없습니다.')) {
-        setIsError('true');
-        setErrMsg('아이디 혹은 비밀번호를 다시 입력해주세요.');
-        setPassword('');
-      }
-    }
-  }
+  const onSubmit = handleSubmit((data) => {
+    login(setError, data, login_type, setFocus, resetField);
+  });
 
-  if (token) {
+  const user = getUser();
+
+  // 이미 로그인 한 회원일 경우
+  if (user) {
     return (
       <>
         <h1>이미 로그인한 회원입니다.</h1>
@@ -80,40 +61,44 @@ function Login() {
     );
   }
 
+  //로그인 폼
   return (
     <>
       <Section>
         <ImgLogo src={logo} alt="호두마켓" onClick={() => navigate('/')} />
         <CustomerLink href="/login">구매회원 로그인</CustomerLink>
-        <SellerLink href="#">판매회원 로그인</SellerLink>
-        <FormStyle>
+        <SellerLink href="/login">판매회원 로그인</SellerLink>
+        <FormStyle onSubmit={onSubmit}>
           <Fieldset>
             <legend className="visually-hidden">로그인</legend>
             <label htmlFor="email" className="visually-hidden">
               아이디
             </label>
             <Input
+              id="id"
               type="text"
               placeholder="아이디"
-              minLength="5"
-              maxLength="12"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              ref={usernameRef}
+              {...register('id', {
+                required: '아이디를 입력해 주세요.',
+              })}
             />
             <label className="visually-hidden" htmlFor="password">
               비밀번호
             </label>
             <Input
+              id="pw"
               type="password"
               placeholder="비밀번호"
-              minLength="6"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              maxLength="16"
-              ref={passwordRef}
+              {...register('pw', {
+                required: '비밀번호를 입력해 주세요.',
+              })}
             />
-            <ErrorMsg display={isError}>{errMsg}</ErrorMsg>
+            {(errors.id && (
+              <ErrorMsg>{errors.id.message.toString()}</ErrorMsg>
+            )) ||
+              (errors.pw && (
+                <ErrorMsg>{errors.pw.message.toString()}</ErrorMsg>
+              ))}
           </Fieldset>
           <MdButton
             padding={'19px 0'}
@@ -121,7 +106,6 @@ function Login() {
             type="submit"
             margin={'26px 0 0'}
             background={`${colors.green}`}
-            onClick={handleSubmitLogin}
           >
             로그인
           </MdButton>
