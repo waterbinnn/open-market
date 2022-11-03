@@ -24,7 +24,7 @@ export const FormStyle = styled.form({
   background: `${colors.white}`,
   borderRadius: '0 0 10px 10px',
   width: '90%',
-  padding: '36px 10px',
+  padding: '36px 20px',
   margin: '128px auto 0',
   zIndex: '50',
 });
@@ -95,7 +95,6 @@ export const CheckGroup = styled.div`
   display: flex;
   gap: 12px;
   margin-top: 34px;
-  width: 480px;
 
   img {
     margin-bottom: 15px;
@@ -125,7 +124,6 @@ export const Nav = styled.nav`
   line-height: 20px;
 `;
 
-// 기능구현에 따른 수정 필요
 export const ErrorMsg = styled.strong`
   margin-top: 10px;
   color: ${(props) => props.color};
