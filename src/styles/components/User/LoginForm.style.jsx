@@ -5,7 +5,7 @@ import { colors } from '../../constants/colors';
 export const ErrorMsg = styled.strong`
   display: ${(props) => props.display};
   margin-top: 10px;
-  color: red;
+  color: ${(props) => props.color || `${colors.red}`};
   font-size: 13px;
   line-height: 20px;
   font-weight: 400;

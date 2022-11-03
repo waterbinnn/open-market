@@ -67,18 +67,18 @@ export const Input = styled.input`
   padding: 16px 8px;
   font-size: 16px;
   line-height: 1.5;
+  background-image: url(${(props) => props.background});
+  background-repeat: no-repeat;
+  background-position: center right 16px;
+  background-size: 20px;
+
+  &:focus {
+    border: 1px solid ${colors.green};
+  }
 `;
 
 export const InputPassword = styled.div`
   position: relative;
-`;
-
-export const IconCheck = styled.img`
-  position: absolute;
-  top: 20px;
-  right: 10px;
-  width: 20px;
-  height: 20px;
 `;
 
 export const InputGroup = styled.div`
