@@ -1,11 +1,4 @@
-import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  FieldValues,
-  UseFormGetValues,
-  UseFormSetError,
-} from 'react-hook-form';
-
 import { axiosInstance } from '../axiosInstance';
 import { setUser } from '../user-storage';
 
@@ -44,5 +37,35 @@ export const useAuth = () => {
       }
     }
   };
-  return { login };
+
+  const signUp = async (setError, data, type, setFocus, resetField) => {
+    //휴대폰번호
+    const phoneNumber =
+      data.firstPhoneNum + data.middlePhoneNum + data.lastPhoneNum;
+
+    const reqData = {
+      username: data.id,
+      password: data.password,
+      password2: data.password2,
+      phone_number: phoneNumber,
+      name: data.name,
+    };
+
+    try {
+      const { data: resData } = await axiosInstance.post(
+        'accounts/signup/',
+        reqData
+      );
+      if (resData) {
+        // setBtnColor(colors.green);
+        navigate('/');
+      }
+      console.log(resData);
+    } catch (err) {
+      console.error(err);
+      setBtnColor(colors.grey);
+    }
+  };
+
+  return { login, signUp };
 };
