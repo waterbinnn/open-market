@@ -71,7 +71,7 @@ function Login() {
         <FormStyle onSubmit={onSubmit}>
           <Fieldset>
             <legend className="visually-hidden">로그인</legend>
-            <label htmlFor="email" className="visually-hidden">
+            <label htmlFor="id" className="visually-hidden">
               아이디
             </label>
             <Input
@@ -82,14 +82,15 @@ function Login() {
                 required: '아이디를 입력해 주세요.',
               })}
             />
+
             <label className="visually-hidden" htmlFor="password">
               비밀번호
             </label>
             <Input
-              id="pw"
+              id="password"
               type="password"
               placeholder="비밀번호"
-              {...register('pw', {
+              {...register('password', {
                 required: '비밀번호를 입력해 주세요.',
               })}
             />
@@ -97,7 +98,7 @@ function Login() {
               <ErrorMsg>{errors.id.message.toString()}</ErrorMsg>
             )) ||
               (errors.pw && (
-                <ErrorMsg>{errors.pw.message.toString()}</ErrorMsg>
+                <ErrorMsg>{errors.password.message.toString()}</ErrorMsg>
               ))}
           </Fieldset>
           <MdButton
