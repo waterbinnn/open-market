@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { PhoneDropDown } from '../Common/DropDown';
+import { PhoneDropDown } from '../../Common/DropDown';
 
-import { SelectBtn } from '../../styles/components/User/SignupForm.style';
+import { SelectBtn } from '../../../styles/components/User/SignupForm.style';
 import {
   InputGroup,
   Label,
   Input,
-} from '../../styles/components/Common/FormStyles.style';
+} from '../../../styles/components/Common/FormStyles.style';
 
 export default function PhoneForm({ register }) {
   const { setValue } = useForm({ mode: 'onChange' });

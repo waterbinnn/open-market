@@ -2,8 +2,8 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 
-import { useAuth } from '../../auth/useAuth';
-import { idRule, pwRule } from '../../auth/reqExp';
+import { useAuth } from '../../../auth/useAuth';
+import { idRule, pwRule } from '../../../auth/reqExp';
 
 //Assets
 import logo from '../../assets/images/Logo-hodu.png';
@@ -13,14 +13,14 @@ import checkOffIcon from '../../assets/icons/icon-check-off.svg';
 import checkOnIcon from '../../assets/icons/icon-check-on.svg';
 
 //Styles
-import { colors } from '../../styles/constants/colors';
-import { MdButton } from '../../styles/modules/_Button';
+import { colors } from '../../../styles/constants/colors';
+import { MdButton } from '../../../styles/modules/_Button';
 import {
   CustomerLink,
   SellerLink,
-} from '../../styles/components/User/SignupForm.style';
-import { ErrorMsg } from '../../styles/components/User/LoginForm.style';
-import { MsButton } from '../../styles/modules/_Button';
+} from '../../../styles/components/User/SignupForm.style';
+import { ErrorMsg } from '../../../styles/components/User/LoginForm.style';
+import { MsButton } from '../../../styles/modules/_Button';
 
 import {
   Section,
@@ -32,11 +32,11 @@ import {
   Label,
   Input,
   InputPassword,
-} from '../../styles/components/Common/FormStyles.style';
+} from '../../../styles/components/Common/FormStyles.style';
 
 import PhoneForm from './phoneForm';
 
-import { useSignup } from './hooks/useSignup';
+import { useSignup } from '../hooks/useSignup';
 
 function SignupForm() {
   const {
