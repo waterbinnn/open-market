@@ -101,22 +101,34 @@ export function PhoneDropDown(props) {
   return (
     <Nums isDropDown={isDropDown} onClick={handleClick}>
       <li>
-        <button type="button">010</button>
+        <button type="button" value={'010'}>
+          010
+        </button>
       </li>
       <li>
-        <button type="button">011</button>
+        <button type="button" value={'011'}>
+          011
+        </button>
       </li>
       <li>
-        <button type="button">016</button>
+        <button type="button" value={'016'}>
+          016
+        </button>
       </li>
       <li>
-        <button type="button">017</button>
+        <button type="button" value={'017'}>
+          017
+        </button>
       </li>
       <li>
-        <button type="button">018</button>
+        <button type="button" value={'018'}>
+          018
+        </button>
       </li>
       <li>
-        <button type="button">019</button>
+        <button type="button" value={'019'}>
+          019
+        </button>
       </li>
     </Nums>
   );
