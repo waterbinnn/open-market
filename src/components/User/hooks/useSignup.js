@@ -14,40 +14,56 @@ export const useSignup = () => {
   const [msgColor, setMsgColor] = useState(colors.red);
   const [checkIcon, setCheckIcon] = useState(checkOffIcon);
   const [checkRepeatIcon, setCheckRepeatIcon] = useState(checkOffIcon);
+  const [isCheckedPw, setIsCheckedPw] = useState(false);
+  const [isAllowed, setIsAllowed] = useState(true);
 
   //아이디 중복체크
   const checkIdValid = async (setError, getValues) => {
-    try {
-      const { data } = await axiosInstance.post(
-        'accounts/signup/valid/username/',
-        {
-          username: getValues('id'),
+    if (getValues('id').length > 5) {
+      try {
+        const { data } = await axiosInstance.post(
+          'accounts/signup/valid/username/',
+          {
+            username: getValues('id'),
+          }
+        );
+        setIsUserIdValid(true);
+        setSuccessMsg(data.Success);
+      } catch (error) {
+        console.error(error);
+        setIsUserIdValid(false);
+        if (error) {
+          setError('id', {
+            type: 'idError',
+            message: error.response.data.FAIL_Message,
+          });
         }
-      );
-      setIsUserIdValid(true);
-      setSuccessMsg(data.Success);
-    } catch (error) {
-      console.error(error);
-      if (error) {
-        setError('id', {
-          type: 'idError',
-          message: error.response.data.FAIL_Message,
-        });
       }
+    } else {
+      setIsUserIdValid(false);
+      setError('id', {
+        type: 'idError',
+        message: '6-16자 이내의 영문 소문자, 대문자, 숫자만 사용 가능합니다.',
+      });
     }
   };
 
   //비밀번호 유효성 검사
-  const checkPw = (getValues) => {
+  const checkPw = (getValues, reset) => {
     if (pwRule.test(getValues('password')) === true) {
       setCheckIcon(checkOnIcon);
+      setIsCheckedPw(true);
+      setIsAllowed(false);
     } else {
       setCheckIcon(checkOffIcon);
+      setCheckRepeatIcon(checkOffIcon);
+      setIsCheckedPw(false);
+      setIsAllowed(true);
     }
   };
 
   //비밀번호 일치 검사
-  const checkPWSame = (setError, getValues) => {
+  const checkPWSame = (setError, getValues, resetField) => {
     if (getValues('password') === getValues('password2')) {
       setCheckRepeatIcon(checkOnIcon);
       setIsPasswordValid(true);
@@ -65,6 +81,7 @@ export const useSignup = () => {
     isUserIdValid,
     setIsUserIdValid,
     isPasswordValid,
+    isCheckedPw,
     successMsg,
     setSuccessMsg,
     pwMsg,
@@ -74,6 +91,7 @@ export const useSignup = () => {
     checkPWSame,
     checkIcon,
     checkRepeatIcon,
-    submitSignUp,
+    isAllowed,
+    setIsAllowed,
   };
 };
