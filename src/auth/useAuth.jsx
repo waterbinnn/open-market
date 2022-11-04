@@ -1,17 +1,25 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../axiosInstance';
+import { useSignup } from '../components/User/hooks/useSignup';
 import { setUser } from '../user-storage';
 
+import checkOffIcon from '../assets/icons/icon-check-off.svg';
+
 export const useAuth = () => {
+  const [isSignupErr, setIsSignupErr] = useState(false);
+
   const navigate = useNavigate();
+
+  const { setIsAllowed, setCheckRepeatIcon, setPwMsg } = useSignup;
 
   const login = async (setError, data, login_type, setFocus, resetField) => {
     const reqData = {
       username: data.id,
-      password: data.pw,
+      password: data.password,
       login_type: login_type,
     };
-
+    console.log(reqData);
     try {
       const { data: resData } = await axiosInstance.post(
         'accounts/login/',
@@ -25,9 +33,9 @@ export const useAuth = () => {
     } catch (error) {
       if (error) {
         if (error.response.status === 401) {
-          setFocus('pw');
-          resetField('pw');
-          setError('pw', {
+          setFocus('password');
+          resetField('password');
+          setError('password', {
             type: 'loginError',
             message: '아이디 또는 비밀번호가 일치하지 않습니다.',
           });
@@ -38,7 +46,7 @@ export const useAuth = () => {
     }
   };
 
-  const signUp = async (setError, data, type, setFocus, resetField) => {
+  const signUp = async (data, resetField, setFocus) => {
     //휴대폰번호
     const phoneNumber =
       data.firstPhoneNum + data.middlePhoneNum + data.lastPhoneNum;
@@ -57,13 +65,24 @@ export const useAuth = () => {
         reqData
       );
       if (resData) {
-        // setBtnColor(colors.green);
+        console.log(resData);
         navigate('/');
       }
-      console.log(resData);
     } catch (err) {
       console.error(err);
-      setBtnColor(colors.grey);
+      setIsSignupErr(false);
+      if ('password' in err.response.data) {
+        alert(err.response.data.password[0]);
+        setFocus('password');
+        resetField('password');
+        resetField('password2');
+        setCheckRepeatIcon(checkOffIcon);
+        setPwMsg('');
+        setIsAllowed(true);
+      }
+      if ('phone_number' in err.response.data) {
+        alert(err.response.data.phone_number[0]);
+      }
     }
   };
 
