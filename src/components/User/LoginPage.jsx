@@ -97,7 +97,7 @@ function Login() {
             {(errors.id && (
               <ErrorMsg>{errors.id.message.toString()}</ErrorMsg>
             )) ||
-              (errors.pw && (
+              (errors.password && (
                 <ErrorMsg>{errors.password.message.toString()}</ErrorMsg>
               ))}
           </Fieldset>
